@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.connect,
+.usernameInput,
+.messageInput,
+.message {
+  flex: none;
+  width: auto;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 5px;
+}
+
+.service {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-height: 300px;
+  min-width: 200px;
+}
