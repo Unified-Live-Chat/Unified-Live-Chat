@@ -1,8 +1,9 @@
 import './App.css';
 
-import Youtube from '@/components/service/Youtube';
-import Twitch from '@/components/service/Twitch';
 import Dashboard from '@/components/Dashboard';
+import Stack from "@mui/material/Stack";
+import Divider from '@mui/material/Divider';
+import ServicePanel from '@/components/ServicePanel';
 
 function App() {
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
@@ -23,11 +24,11 @@ function App() {
 
   return (
     <>
-      <Dashboard />
-      <div className="container">
-        <Youtube />
-        <Twitch />
-      </div>
+      <Stack>
+        <Dashboard />
+        <Divider variant="middle" />
+        <ServicePanel />
+      </Stack>
     </>
   );
 }

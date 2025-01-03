@@ -6,9 +6,17 @@ export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: {
     name: 'Unified Live Chat',
+    content_scripts: [
+      {
+        all_frames: true,
+        js: ['youtube-main-world.js', 'twitch-main-world.js'],
+        matches: ['*://*.twitch.tv/*', '*://*.youtube.com/*'],
+
+      }
+    ],
     web_accessible_resources: [
       {
-        resources: ['twitch-chat-main-world.js'],
+        resources: ['twitch-main-world.js', 'youtube-main-world.js'],
         matches: ['*://*.twitch.tv/*', '*://*.youtube.com/*'],
       },
     ],
@@ -18,7 +26,6 @@ export default defineConfig({
       'identity',
       'identity.email',
       'webRequest',
-      'webRequestBlocking',
       'scripting',
       'webNavigation',
       'activeTab',

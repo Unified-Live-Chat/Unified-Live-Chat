@@ -1,67 +1,41 @@
-import { useState } from 'react';
 import './styles.css';
 import '../service.css';
+import twitchLogo from '@/assets/glitch_flat_purple.png';
+import Stack from '@mui/material/Stack';
+import {OAuthButton} from '../service-components';
+import AccountIcon, { UserRole } from '@/components/AccountIcon';
+import Debug from '@/components/Debug';
 
 function Twitch() {
-  const [username, setUsername] = useState('');
-  const [message, setMessage] = useState('');
 
   return (
     <>
       <div className="service twitch">
-        <p>Twitch</p>
-        <input
-          className="connect"
-          type="button"
-          value="Connect Account"
-          onClick={() => {
-            chrome.runtime.sendMessage({
-              message: 'get_auth_token_twitch',
-            });
-          }}
-        />
 
-        {/* Input field for Username */}
-        <input
-          className="usernameInput"
-          type="text"
-          placeholder="Enter Username"
-          value={username}
-          // Update the username state when user types in input
-          onChange={(e) => setUsername(e.target.value)}
-        />
+      <Stack direction="row" spacing={3} className='top-bar' alignItems="center">
 
-        {/* Input field for Message */}
-        <input
-          className="messageInput"
-          type="text"
-          placeholder="Enter Message"
-          value={message}
-          // Update the message state when user types in input
-          onChange={(e) => setMessage(e.target.value)}
-        />
+        <img src={twitchLogo} alt="Twitch Logo" 
+        style={{ width: '45px', height: '54px' }} />
+        
+        <AccountIcon serviceAccount={null} userRole={UserRole.Streamer}/>
+      </Stack>
+        
+      <OAuthButton
+              fullWidth
+              variant="outlined"
+              onClick={() => {
+                chrome.runtime.sendMessage({
+                  message: 'get_auth_token_twitch',
+                });
+              }}
+              startIcon={<img src={twitchLogo}
+                style={{ width: '16px', height: 'auto'}} />}
+            >
+            Sign in with Twitch
+        </OAuthButton>
 
-        <input
-          className="message"
-          type="button"
-          value="Send Message"
-          onClick={() => {
-            console.log(username, message);
-            chrome.runtime.sendMessage(
-              {
-                message: 'inject_message',
-                username: username,
-                text: message,
-              },
-              function (response) {
-                console.log(
-                  'Response from background or content script:',
-                  response,
-                );
-              },
-            );
-          }}
-        />
+        <Debug />
+
       </div>
     </>
   );

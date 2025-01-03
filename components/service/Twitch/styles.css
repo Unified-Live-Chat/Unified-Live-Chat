@@ -1,5 +1,4 @@
 .service.twitch {
-  background-color: purple;
   display: flex;
   flex-direction: column;
 }

@@ -17,7 +17,12 @@
 .service {
   flex: 1;
   display: flex;
+  min-width: 225px;
+}
+
+.top-bar {
+  margin-top: 7.5%;
+  margin-bottom: 2.5%;
+  min-height: 60px;
   justify-content: center;
-  min-height: 300px;
-  min-width: 200px;
 }
