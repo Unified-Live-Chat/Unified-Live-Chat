@@ -23,7 +23,7 @@ export default defineUnlistedScript(() => {
 
   function youtubeMessageBuilder(username: string, text: string) {
     const youtubeMessage: YouTubeMessage = {
-      addChatItemAction: {
+      // addChatItemAction: {
         clientId: Math.random().toString().slice(2, 10) + "-" + Math.random().toString().slice(2, 19),
         
         item: {
@@ -74,7 +74,7 @@ export default defineUnlistedScript(() => {
               id: "ChwKGkNJM2dsX2ZoLVlrREZXMEoxZ0FkSGprWk5k",
             }
           }
-        },
+        // },
       },
     };
   
@@ -84,7 +84,7 @@ export default defineUnlistedScript(() => {
   function injectFakeMessage(username: string, text: string) {
       const fakeMessage: YouTubeMessage = youtubeMessageBuilder(username, text);
 
-      actionHandler.onPushMessage(fakeMessage);
+      actionHandler.handleLiveChatActions_([{addChatItemAction: fakeMessage}]);
   }
 
   window.addEventListener('message', (event) => {

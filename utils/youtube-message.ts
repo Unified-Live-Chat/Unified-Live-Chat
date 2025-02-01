@@ -62,11 +62,8 @@ interface Item {
     liveChatMessageRenderer: LiveChatMessageRenderer;
 }
 
-interface AddChatItemActionBody {
-    clientId?: string; 
-    item: Item;
-}
 
 interface YouTubeMessage {
-    addChatItemAction: AddChatItemActionBody; 
+    clientId?: string; 
+    item: Item;
 }

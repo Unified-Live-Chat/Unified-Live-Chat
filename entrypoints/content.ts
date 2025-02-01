@@ -8,7 +8,9 @@ export default defineContentScript({
         // Convert these over to use chrome.runtime messages so I can relay the Continuation data back and unify the formatting
         window.postMessage(
           {
-            message: 'get_continuation',
+            message: 'inject_message',
+            username,
+            text,
           },
           '*',
         );
@@ -54,7 +56,7 @@ export default defineContentScript({
     //   {
     //     const continuation = event.data.continuation;
 
-    //     const youtubeMessage: YouTubeMessage = youtubeMessageBuilder("myUsernameasdf", "message");
+    //     const youtubeMessage: YouTubeMessage = youtubeMessageBuilder("myUsername", "message");
   
     //     fetch('https://www.youtube.com/youtubei/v1/live_chat/get_live_chat?prettyPrint=false', {
     //       method: 'POST',
