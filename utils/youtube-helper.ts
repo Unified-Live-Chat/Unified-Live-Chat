@@ -1,4 +1,4 @@
-function youtubeMessageBuilder(username: string, text: string) {
+export function youtubeMessageBuilder(username: string, text: string) {
     const youtubeMessage: YouTubeMessage = {
         clientId: Math.random().toString().slice(2, 10) + "-" + Math.random().toString().slice(2, 19),
         
@@ -121,7 +121,7 @@ interface Item {
 }
 
 
-interface YouTubeMessage {
+export interface YouTubeMessage {
     clientId?: string; 
     item: Item;
 }

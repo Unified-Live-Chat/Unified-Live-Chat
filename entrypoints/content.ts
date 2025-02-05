@@ -1,7 +1,7 @@
 export default defineContentScript({
   matches: ['*://*.youtube.com/*', '*://*.twitch.tv/*'],
   allFrames: true,
-  main(ctx) {
+  main() {
 
     function injectMessage(currentUrl: URL, text: string, username: string) {
 
@@ -45,7 +45,7 @@ export default defineContentScript({
 
     // Inject messages via the injection script
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      request = request.request;
+      // request = request.request;
       console.log(request);
 
       if (request.message === 'inject_message') {

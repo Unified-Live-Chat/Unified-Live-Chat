@@ -1,6 +1,6 @@
 // I will need to work on making this a fully 
 // customable class once more features are in.
-function twitchMessageBuilder(username: string, text: string) {
+export function twitchMessageBuilder(username: string, text: string) {
   const twitchMessage: TwitchMessage = {
     badges: {},
     badgeDynamicData: {},
@@ -54,7 +54,7 @@ interface MessagePart {
   content: string;
 }
 
-interface TwitchMessage {
+export interface TwitchMessage {
   badges: TwitchBadges;
   badgeDynamicData: Record<string, unknown>;
   bits: number;

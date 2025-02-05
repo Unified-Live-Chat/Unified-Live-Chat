@@ -1,3 +1,5 @@
+import {YouTubeMessage, youtubeMessageBuilder} from "@/utils/youtube-helper"
+
 export default defineUnlistedScript(() => {
   
   // Only run on YouTube

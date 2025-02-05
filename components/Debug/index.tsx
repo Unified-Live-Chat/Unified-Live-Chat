@@ -27,19 +27,17 @@ function Debug() {
           type="button"
           value="Send Message"
           onClick={() => {
-            chrome.runtime.sendMessage(
-              {
-                message: 'inject_message',
-                username: username,
-                text: message,
-              },
-              function (response) {
-                console.log(
-                  'Response from background or content script:',
-                  response,
-                );
-              },
-            );
+
+            chrome.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+              chrome.tabs.sendMessage(
+                tabs[0].id!, 
+                {
+                  message: 'inject_message',
+                  username: username,
+                  text: message,
+                }
+              );
+            });
           }}
         />
       </>

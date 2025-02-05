@@ -1,3 +1,5 @@
+import {TwitchMessage, twitchMessageBuilder} from "@/utils/twitch-helper"
+
 export default defineUnlistedScript(() => {
 
   // Only run on Twitch
