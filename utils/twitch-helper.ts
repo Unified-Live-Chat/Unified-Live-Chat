@@ -1,4 +1,4 @@
-// I will need to work on making this a fully 
+// I will need to work on making this a fully
 // customable class once more features are in.
 export function twitchMessageBuilder(username: string, text: string) {
   const twitchMessage: TwitchMessage = {
@@ -34,9 +34,23 @@ export function twitchMessageBuilder(username: string, text: string) {
   return twitchMessage;
 }
 
+// TS interface for on-page data
+export interface ReactFiber {
+  return: ReactFiber | null;
+  stateNode?: {
+    props?: {
+      onPushMessage?: (message: TwitchMessage) => void;
+    };
+  };
+  [key: string]: unknown;
+}
+
+export interface DOMElement extends HTMLElement {
+  [key: string]: unknown;
+}
 
 interface TwitchBadges {
-  [key: string]: string; // e.g., "subscriber": "60"
+  [key: string]: string;
 }
 
 interface TwitchUser {

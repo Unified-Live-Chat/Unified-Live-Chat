@@ -1,31 +1,32 @@
-import {YouTubeMessage, youtubeMessageBuilder} from "@/utils/youtube-helper"
+import {
+  YouTubeMessage,
+  youtubeMessageBuilder,
+  YtLiveChatItemListRenderer,
+  YtActionHandlerBehavior,
+} from '@/utils/youtube-helper';
 
 export default defineUnlistedScript(() => {
-  
   // Only run on YouTube
-  let currentUrl: URL | null = new URL(window.location.href);
-  if (!currentUrl || currentUrl.hostname !== 'www.youtube.com')
-    return;
+  const currentUrl: URL | null = new URL(window.location.href);
+  if (!currentUrl || currentUrl.hostname !== 'www.youtube.com') return;
 
   // Only run in the `chatframe` frame
-  if (!window.frameElement || window.frameElement.id !== 'chatframe') 
-    return;
-
+  if (!window.frameElement || window.frameElement.id !== 'chatframe') return;
 
   const chatContainer = document.querySelector(
     'yt-live-chat-item-list-renderer',
-  )
-  // @ts-ignore
-  const actionHandler = chatContainer!.ytActionHandlerBehavior;
+  ) as YtLiveChatItemListRenderer;
+
+  const actionHandler =
+    chatContainer.ytActionHandlerBehavior as YtActionHandlerBehavior;
 
   // Only run if the `actionHandler` exists
-  if (!actionHandler) 
-      return;
+  if (!actionHandler) return;
 
   function injectFakeMessage(username: string, text: string) {
-      const fakeMessage: YouTubeMessage = youtubeMessageBuilder(username, text);
+    const fakeMessage: YouTubeMessage = youtubeMessageBuilder(username, text);
 
-      actionHandler.handleLiveChatActions_([{addChatItemAction: fakeMessage}]);
+    actionHandler.handleLiveChatActions_([{ addChatItemAction: fakeMessage }]);
   }
 
   window.addEventListener('message', (event) => {

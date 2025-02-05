@@ -1,18 +1,14 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 import { storage } from 'wxt/storage';
 
-const supabaseUrl = import.meta.env.WXT_SUPABASE_URL
-const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY
+const supabaseUrl = import.meta.env.WXT_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY;
 
 export default defineBackground(() => {
-  
-  const supabase = createClient(
-      supabaseUrl,
-      supabaseAnonKey
-    )
+  const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-    // add tab listener when background script starts
-    chrome.tabs.onUpdated.addListener((_tabId, _changeInfo, tab) => {
+  // add tab listener when background script starts
+  chrome.tabs.onUpdated.addListener((_tabId, _changeInfo, tab) => {
     if (tab.url?.startsWith(chrome.identity.getRedirectURL())) {
       finishUserOAuth(tab);
     }
@@ -20,16 +16,21 @@ export default defineBackground(() => {
 
   /**
    * Method used to finish OAuth callback for a user authentication.
-   * Based on an example authored by Dragos Sebestin: 
+   * Based on an example authored by Dragos Sebestin:
    * https://beastx.ro/supabase-login-with-oauth-in-chrome-extensions
    */
   async function finishUserOAuth(tab: chrome.tabs.Tab) {
-    if (!tab) throw new Error("Tab is undefined.");
-    if (!tab.url) throw new Error("Tab URL cannot be empty. Tab data: " + JSON.stringify(tab));
-    if (!tab.id) throw new Error("Tab ID cannot be empty. Tab data: " + JSON.stringify(tab));
+    if (!tab) throw new Error('Tab is undefined.');
+    if (!tab.url)
+      throw new Error(
+        'Tab URL cannot be empty. Tab data: ' + JSON.stringify(tab),
+      );
+    if (!tab.id)
+      throw new Error(
+        'Tab ID cannot be empty. Tab data: ' + JSON.stringify(tab),
+      );
 
     try {
-
       // extract tokens from hash
       const hashMap = parseUrlHash(tab.url);
       const access_token = hashMap.get('access_token');
@@ -52,7 +53,6 @@ export default defineBackground(() => {
 
       // Delete the tab
       chrome.tabs.remove(tab.id);
-
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +60,7 @@ export default defineBackground(() => {
 
   /**
    * Helper method used to parse the hash of a redirect URL.
-   * Based on an example authored by Dragos Sebestin: 
+   * Based on an example authored by Dragos Sebestin:
    * https://beastx.ro/supabase-login-with-oauth-in-chrome-extensions
    */
   function parseUrlHash(url: string) {
@@ -69,10 +69,9 @@ export default defineBackground(() => {
       hashParts.map((part) => {
         const [name, value] = part.split('=');
         return [name, value];
-      })
+      }),
     );
 
     return hashMap;
   }
-
 });

@@ -25,35 +25,33 @@ function Dashboard() {
         <Stack direction="row">
           <div className="container">
             <div>
-              
               <Avatar
-                sx={{ width: 80, height: 80 }} 
-                className="avatar">
-              </Avatar>
-              
-                <Badge
-                  overlap="circular"
-                  anchorOrigin={{ vertical: 'bottom'}}
-                  badgeContent={'Live'}
-                  color='error'
-                  sx={{
-                    "& .MuiBadge-badge": {
-                      backgroundColor: "red"
-                    }
-                  }}
-                  className="overlay"
-                >
-                </Badge>
-              </div>
-            </div>
+                sx={{ width: 80, height: 80 }}
+                className="avatar"
+              ></Avatar>
 
-          <Stack spacing={0.5} sx={{ padding: "10px" }}>
-            <Stack direction='row'>
+              <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: 'bottom' }}
+                badgeContent={'Live'}
+                color="error"
+                sx={{
+                  '& .MuiBadge-badge': {
+                    backgroundColor: 'red',
+                  },
+                }}
+                className="overlay"
+              ></Badge>
+            </div>
+          </div>
+
+          <Stack spacing={0.5} sx={{ padding: '10px' }}>
+            <Stack direction="row">
               <Item>ULC-Youtube</Item>
               <PersonIcon />
               <p>145</p>
             </Stack>
-            <Stack direction='row'>
+            <Stack direction="row">
               <Item>ULC-Twitch</Item>
               <PersonIcon />
               <p>207</p>

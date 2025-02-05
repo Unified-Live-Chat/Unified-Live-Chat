@@ -1,0 +1,18 @@
+# Folders
+.husky/
+.output/
+.vscode/
+.wtx/
+assets/
+node_modules/
+public/icon/
+
+# Files
+.env
+.env.example
+.prettierrc
+package.json
+README.node_modules
+tsconfig.json
+wxt.config.ts
+yarn.lock
