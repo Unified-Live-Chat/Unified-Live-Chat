@@ -5,30 +5,28 @@ import youtubeLogo from '@/assets/yt_icon_rgb.png';
 
 import {GoogleIcon} from '../service-icons';
 import Stack from '@mui/material/Stack';
-import { GetGoogleAccount } from '@/utils/storage';
-import { GoogleAccount } from '@/utils/service-account';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AccountIcon, { UserRole } from '@/components/AccountIcon';
 
 function Youtube() {
-  const [account, setAccount] = useState<GoogleAccount | null>();
+  // const [account, setAccount] = useState<GoogleAccount | null>();
 
-  useEffect(() => {
-    const fetchAccount = async () => {
-      try {
-        const googleAccount = await GetGoogleAccount.getValue();
-        setAccount(googleAccount);
-      } catch (error) {
-        console.error("Failed to fetch the name:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchAccount = async () => {
+  //     try {
+  //       const googleAccount = await GetGoogleAccount.getValue();
+  //       setAccount(googleAccount);
+  //     } catch (error) {
+  //       console.error("Failed to fetch the name:", error);
+  //     }
+  //   };
 
-    fetchAccount();
-  }, []);
+  //   fetchAccount();
+  // }, []);
 
   let accountActionButton: React.ReactNode;
 
-  if(account)
+  if(false)
   {
     accountActionButton = <OAuthButton
     fullWidth
@@ -49,16 +47,7 @@ function Youtube() {
       fullWidth
       variant="outlined"
       onClick={() => {
-
-        const myObject: GoogleAccount = {
-          name: "William",
-        };
-
-        GetGoogleAccount.setValue(myObject);
-
-        // chrome.runtime.sendMessage({
-        //   message: 'get_auth_token_google',
-        // });
+        //TODO
       }}
       startIcon={<GoogleIcon />}
     >
@@ -70,12 +59,12 @@ function Youtube() {
     <>
       <Stack className="service youtube">
 
-        <Stack direction="row" spacing={3} className='top-bar' alignItems="center">
+        <Stack direction="row" spacing={3} className='top-bar'>
 
           <img src={youtubeLogo} alt="YouTube Logo" 
           style={{ width: '68px', height: '48px' }} />
 
-          <AccountIcon serviceAccount={account} userRole={UserRole.Viewer}/>
+          {/* <AccountIcon serviceAccount={account} userRole={UserRole.Viewer}/> */}
         </Stack>
         {accountActionButton}
       </Stack>

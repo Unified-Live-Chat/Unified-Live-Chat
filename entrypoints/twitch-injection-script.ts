@@ -56,40 +56,6 @@ export default defineUnlistedScript(() => {
     return node;
   }
 
-  function twitchMessageBuilder(username: string, text: string) {
-    const twitchMessage: TwitchMessage = {
-      badges: {},
-      badgeDynamicData: {},
-      bits: 0,
-      user: {
-        userDisplayName: username,
-        isIntl: false,
-        userLogin: username,
-        userID: '00000000',
-        userType: '',
-        color: '#FF0000',
-        isSubscriber: false,
-      },
-      messageParts: [
-        {
-          type: 0,
-          content: text,
-        },
-      ],
-      messageBody: text,
-      deleted: false,
-      banned: false,
-      hidden: false,
-      timestamp: Date.now(),
-      type: 0,
-      messageType: 0,
-      isHistorical: false,
-      id: crypto.randomUUID(),
-    };
-  
-    return twitchMessage;
-  }
-
   // Site Elements:
   let chatElement: any | null = null;
 

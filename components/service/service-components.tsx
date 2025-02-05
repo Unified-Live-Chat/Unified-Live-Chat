@@ -1,6 +1,30 @@
 import Button from '@mui/material/Button';
 import { blue, grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
+import { createClient, Provider } from '@supabase/supabase-js'
+import { storage } from 'wxt/storage';
+
+const supabaseUrl = import.meta.env.WXT_SUPABASE_URL
+const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY
+
+export const supabase = createClient(
+    supabaseUrl,
+    supabaseAnonKey
+  )
+
+export async function authenticate(provider: Provider, scopes: string) {
+  storage.setItem('session:provider', provider)
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: provider,
+    options: {
+      redirectTo: chrome.identity.getRedirectURL(),
+      scopes: scopes
+    },
+  });
+  if (error) throw error;
+
+  await chrome.tabs.create({ url: data.url });
+}
 
 export const OAuthButton = styled(Button)({
     color: grey[800],

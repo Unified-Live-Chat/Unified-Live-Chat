@@ -1,29 +1,5 @@
-export default defineUnlistedScript(() => {
-  
-  // Only run on YouTube
-  let currentUrl: URL | null = new URL(window.location.href);
-  if (!currentUrl || currentUrl.hostname !== 'www.youtube.com')
-    return;
-
-  // Only run in the `chatframe` frame
-  if (!window.frameElement || window.frameElement.id !== 'chatframe') 
-    return;
-
-
-  const chatContainer = document.querySelector(
-    'yt-live-chat-item-list-renderer',
-  )
-  // @ts-ignore
-  const actionHandler = chatContainer!.ytActionHandlerBehavior;
-
-  // Only run if the `actionHandler` exists
-  if (!actionHandler) 
-      return;
-
-
-  function youtubeMessageBuilder(username: string, text: string) {
+function youtubeMessageBuilder(username: string, text: string) {
     const youtubeMessage: YouTubeMessage = {
-      // addChatItemAction: {
         clientId: Math.random().toString().slice(2, 10) + "-" + Math.random().toString().slice(2, 19),
         
         item: {
@@ -74,22 +50,78 @@ export default defineUnlistedScript(() => {
               id: "ChwKGkNJM2dsX2ZoLVlrREZXMEoxZ0FkSGprWk5k",
             }
           }
-        // },
       },
     };
   
     return youtubeMessage;
   }
 
-  function injectFakeMessage(username: string, text: string) {
-      const fakeMessage: YouTubeMessage = youtubeMessageBuilder(username, text);
+interface Runs {
+    text: string;
+}
 
-      actionHandler.handleLiveChatActions_([{addChatItemAction: fakeMessage}]);
-  }
+interface Message {
+    runs: Runs[]
+}
 
-  window.addEventListener('message', (event) => {
-    if (event.data.message === 'inject_message') {
-      injectFakeMessage(event.data.username, event.data.text);
-    }
-  });
-});
+interface Thumbnails {
+    height: number;
+    width: number;
+    url: string;
+}
+
+interface AuthorPhoto {
+    thumbnails: Thumbnails[];
+}
+
+interface SimpleText {
+    simpleText: string;
+}
+
+interface AccessibilityData {
+    label: string;
+}
+
+interface ContextMenuAccessibility {
+    accessibilityData: AccessibilityData;
+}
+
+interface LiveChatItemContextMenuEndpoint {
+    params: string;
+}
+
+interface WebCommandMetadata {
+    ignoreNavigation: boolean;
+}
+
+interface CommandMetadata {
+    webCommandMetadata: WebCommandMetadata;
+}
+
+interface ContextMenuEndpoint {
+    commandMetadata: CommandMetadata;
+    liveChatItemContextMenuEndpoint: LiveChatItemContextMenuEndpoint;
+    id: string;
+}
+
+interface LiveChatMessageRenderer {
+    authorExternalChannelId: string;
+    authorName: SimpleText;
+    authorPhoto: AuthorPhoto;
+    contextMenuAccessibility: ContextMenuAccessibility;
+    contextMenuEndpoint: unknown;
+    id: string;
+    message: Message;
+    timestampUsec: string;
+
+}
+
+interface Item {
+    liveChatMessageRenderer: LiveChatMessageRenderer;
+}
+
+
+interface YouTubeMessage {
+    clientId?: string; 
+    item: Item;
+}

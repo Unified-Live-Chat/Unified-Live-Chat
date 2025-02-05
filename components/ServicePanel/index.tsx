@@ -3,6 +3,7 @@ import Youtube from "../service/Youtube";
 import Divider from "@mui/material/Divider";
 import Twitch from "../service/Twitch";
 import React from "react";
+import { twitchUrl, youtubeUrl } from '@/utils/constants';
 
 function ServicePanel () {
   const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
@@ -19,22 +20,17 @@ function ServicePanel () {
   let hostService: React.ReactNode | null = null;
   let alternativeServices: React.ReactNode[] = [];
   
-  if (currentUrl && currentUrl.hostname === 'www.youtube.com') {
+  if (currentUrl && currentUrl.hostname === youtubeUrl) {
     hostService = <Youtube />;
     alternativeServices = [<Twitch key="twitch" />];
-  } else if (currentUrl && currentUrl.hostname === 'www.twitch.tv') {
+  } else if (currentUrl && currentUrl.hostname === twitchUrl) {
     hostService = <Twitch />;
     alternativeServices = [<Youtube key="youtube" />];
   }
   else {
-    // hostService = <Greetings />; (TODO)
     alternativeServices = [<Youtube key="youtube" />, <Twitch key="twitch" />];
   }
 
-  if (currentUrl && currentUrl.hostname === 'www.youtube.com') {
-  } else if (currentUrl && currentUrl.hostname === 'www.twitch.tv') {
-  } else {
-  }
   return(
     <>
       <Stack direction="row">

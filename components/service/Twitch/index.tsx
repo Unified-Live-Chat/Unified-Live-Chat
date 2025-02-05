@@ -2,9 +2,14 @@ import './styles.css';
 import '../service.css';
 import twitchLogo from '@/assets/glitch_flat_purple.png';
 import Stack from '@mui/material/Stack';
-import {OAuthButton} from '../service-components';
+import {OAuthButton, authenticate, supabase} from '../service-components';
 import AccountIcon, { UserRole } from '@/components/AccountIcon';
 import Debug from '@/components/Debug';
+import { Button } from '@mui/material';
+import { Provider } from '@supabase/supabase-js'
+
+const provider = "twitch" as Provider
+const twitchScopes =  "user:write:chat user:read:chat"
 
 function Twitch() {
 
@@ -12,7 +17,7 @@ function Twitch() {
     <>
       <div className="service twitch">
 
-      <Stack direction="row" spacing={3} className='top-bar' alignItems="center">
+      <Stack direction="row" spacing={3} className='top-bar'>
 
         <img src={twitchLogo} alt="Twitch Logo" 
         style={{ width: '45px', height: '54px' }} />
@@ -21,18 +26,27 @@ function Twitch() {
       </Stack>
         
       <OAuthButton
-              fullWidth
-              variant="outlined"
-              onClick={() => {
-                chrome.runtime.sendMessage({
-                  message: 'get_auth_token_twitch',
-                });
-              }}
-              startIcon={<img src={twitchLogo}
-                style={{ width: '16px', height: 'auto'}} />}
+        fullWidth
+        variant="outlined"
+        onClick={ async () => {
+          await authenticate(provider, twitchScopes);
+        }}
+        startIcon={<img src={twitchLogo}
+          style={{ width: '16px', height: 'auto'}} />}
             >
-            Sign in with Twitch
+          Sign in with Twitch
         </OAuthButton>
+
+        <Button
+          onClick={ async () => 
+            {
+              await supabase.auth.signOut();
+              chrome.storage.local.remove("session");
+            }
+          }
+          >
+            Sign Out
+        </Button>
 
         <Debug />
 

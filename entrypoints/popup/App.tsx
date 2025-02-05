@@ -17,11 +17,6 @@ function App() {
     });
   }, []);
 
-  if (currentUrl && currentUrl.hostname === 'www.youtube.com') {
-  } else if (currentUrl && currentUrl.hostname === 'www.twitch.tv') {
-  } else {
-  }
-
   return (
     <>
       <Stack>
