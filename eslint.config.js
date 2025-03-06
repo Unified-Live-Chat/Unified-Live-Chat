@@ -27,7 +27,10 @@ export default [
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
-      // Add any other rules you want to configure
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
     },
   },
   {

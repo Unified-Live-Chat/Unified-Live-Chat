@@ -2,10 +2,8 @@ import './styles.css';
 import '../service.css';
 import twitchLogo from '@/assets/glitch_flat_purple.png';
 import Stack from '@mui/material/Stack';
-import { OAuthButton, authenticate, supabase } from '../service-components';
+import { OAuthButton, authenticate } from '../service-components';
 import AccountIcon, { UserRole } from '@/components/AccountIcon';
-import Debug from '@/components/Debug';
-import { Button } from '@mui/material';
 import { Provider } from '@supabase/supabase-js';
 
 const provider = 'twitch' as Provider;
@@ -38,7 +36,7 @@ function Twitch() {
           Sign in with Twitch
         </OAuthButton>
 
-        <Button
+        {/* <Button
           onClick={async () => {
             await supabase.auth.signOut();
             chrome.storage.local.remove('session');
@@ -47,7 +45,7 @@ function Twitch() {
           Sign Out
         </Button>
 
-        <Debug />
+        <Debug /> */}
       </div>
     </>
   );

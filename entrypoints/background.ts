@@ -7,6 +7,12 @@ const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY;
 export default defineBackground(() => {
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+  chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
+    if (message.type === 'open-settings') {
+      chrome.tabs.create({ url: '/settings.html' });
+    }
+  });
+
   // add tab listener when background script starts
   chrome.tabs.onUpdated.addListener((_tabId, _changeInfo, tab) => {
     if (tab.url?.startsWith(chrome.identity.getRedirectURL())) {

@@ -1,48 +1,66 @@
-import Stack from '@mui/material/Stack';
+import { Stack, Divider } from '@mui/material';
+
 import Youtube from '../service/Youtube';
-import Divider from '@mui/material/Divider';
 import Twitch from '../service/Twitch';
-import React from 'react';
-import { twitchUrl, youtubeUrl } from '@/utils/constants';
 
 function ServicePanel() {
-  const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
-
-  useEffect(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const urlStr = tabs[0]?.url ?? '';
-      if (urlStr) {
-        setCurrentUrl(new URL(urlStr));
-      }
-    });
-  }, []);
-
-  let hostService: React.ReactNode | null = null;
-  let alternativeServices: React.ReactNode[] = [];
-
-  if (currentUrl && currentUrl.hostname === youtubeUrl) {
-    hostService = <Youtube />;
-    alternativeServices = [<Twitch key="twitch" />];
-  } else if (currentUrl && currentUrl.hostname === twitchUrl) {
-    hostService = <Twitch />;
-    alternativeServices = [<Youtube key="youtube" />];
-  } else {
-    alternativeServices = [<Youtube key="youtube" />, <Twitch key="twitch" />];
-  }
-
   return (
-    <>
-      <Stack direction="row">
-        {hostService}
-        <Divider orientation="vertical" variant="middle" flexItem />
-        <Stack divider={<Divider flexItem />}>
-          {alternativeServices.map((element, index) => (
-            <React.Fragment key={index}>{element}</React.Fragment>
-          ))}
-        </Stack>
-      </Stack>
-    </>
+    <Stack
+      direction="row"
+      sx={{
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Youtube />
+      <Divider orientation="vertical" variant="middle" flexItem />
+      <Twitch />
+    </Stack>
   );
 }
 
 export default ServicePanel;
+
+// Solution for more then two services:
+//
+// const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
+//
+// useEffect(() => {
+//   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+//     const urlStr = tabs[0]?.url ?? '';
+//     if (urlStr) {
+//       setCurrentUrl(new URL(urlStr));
+//     }
+//   });
+// }, []);
+//
+// const services: Record<string, JSX.Element> = {
+//   [youtubeUrl]: <Youtube />,
+//   [twitchUrl]: <Twitch />
+//   };
+
+//   const hostService = currentUrl ? services[currentUrl.hostname] : null;
+//   const alternativeServices = Object.entries(services)
+//   .filter(([url]) => url !== currentUrl?.hostname)
+//   .map(([url, component]) => React.cloneElement(component, { key: url }));
+//
+// return (
+//   <Stack direction="row"
+//   sx={{
+//     justifyContent: "center",
+//     alignItems: "center",
+//   }}>
+//     {hostService}
+//     {hostService && <Divider orientation="vertical" variant="middle" flexItem />}
+//     <Stack divider={<Divider flexItem />}
+//       sx={{
+//         justifyContent: "center",
+//         alignItems: "center",
+//       }}
+//     >
+//       {alternativeServices.map((element, index) => (
+//         <React.Fragment key={index}>{element}</React.Fragment>
+//       ))}
+//     </Stack>
+//   </Stack>
+// );
