@@ -14,7 +14,6 @@ export default defineContentScript({
           '*',
         );
       } else if (currentUrl.hostname === twitchUrl) {
-        console.log('injectMessage');
         window.postMessage(
           {
             message: 'inject_message',
@@ -33,7 +32,6 @@ export default defineContentScript({
         keepInDom: true,
       });
     } else if (currentUrl && currentUrl.hostname === twitchUrl) {
-      console.log('injectScript');
       injectScript('/twitch-injection-script.js', {
         keepInDom: true,
       });
@@ -43,9 +41,6 @@ export default defineContentScript({
 
     // Inject messages via the injection script
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      // request = request.request;
-      console.log(request);
-
       if (request.message === 'inject_message') {
         injectMessage(currentUrl, request.text, request.username);
         sendResponse(true);
