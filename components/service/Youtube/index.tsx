@@ -1,9 +1,10 @@
 import './styles.css';
 import '../service.css';
 import { OAuthButton } from '../service-components';
-import youtubeLogo from '@/assets/yt_icon_rgb.png';
+
+import YouTubeLogo from '@/assets/youtube';
 import AccountIcon, { UserRole } from '@/components/AccountIcon';
-import { GoogleIcon } from '../service-icons';
+import GoogleLogo from '@/assets/google';
 import Stack from '@mui/material/Stack';
 
 function Youtube() {
@@ -28,7 +29,7 @@ function Youtube() {
       onClick={() => {
         //TODO
       }}
-      startIcon={<GoogleIcon />}
+      startIcon={<GoogleLogo />}
     >
       Sign in with Google
     </OAuthButton>
@@ -38,12 +39,7 @@ function Youtube() {
     <>
       <Stack className="service youtube">
         <Stack direction="row" spacing={3} className="top-bar">
-          <img
-            src={youtubeLogo}
-            alt="YouTube Logo"
-            style={{ width: '68px', height: '48px' }}
-          />
-
+          <YouTubeLogo style={{ width: '50px', height: '50px' }} />
           <AccountIcon serviceAccount={null} userRole={UserRole.Viewer} />
         </Stack>
         {accountActionButton}

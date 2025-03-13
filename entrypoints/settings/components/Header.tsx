@@ -8,6 +8,7 @@ function Header() {
         direction="row"
         spacing={2}
         sx={{
+          mb: 1,
           justifyContent: 'flex-start',
           alignItems: 'center',
         }}

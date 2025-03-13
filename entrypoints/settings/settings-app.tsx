@@ -1,3 +1,5 @@
+import './settings-app.css';
+
 import { useState } from 'react';
 import { Stack, Divider } from '@mui/material';
 import { Person, AutoAwesome, Videocam } from '@mui/icons-material';
@@ -40,7 +42,9 @@ function SettingsApp() {
           onTabChange={setActiveTab}
         />
         <Divider orientation="vertical" flexItem />
-        {renderActivePanel()}
+        <div className="outer">
+          <div className="inner">{renderActivePanel()}</div>
+        </div>
       </Stack>
     </>
   );

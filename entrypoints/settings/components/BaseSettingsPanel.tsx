@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Stack, Divider } from '@mui/material';
 
 export interface BaseSettingsPanelProps {
   title: string;
@@ -12,10 +12,14 @@ export const BaseSettingsPanel: React.FC<BaseSettingsPanelProps> = ({
 }) => {
   return (
     <Box>
-      <Typography variant="h5" sx={{ mb: 3, fontWeight: 600 }}>
-        {title}
-      </Typography>
-      <Box sx={{ '& > *:not(:last-child)': { mb: 3 } }}>{children}</Box>
+      <Stack direction="column">
+        <Typography variant="h5" sx={{ mt: 2, mb: 2, fontWeight: 600 }}>
+          {title}
+        </Typography>
+
+        <Divider />
+        <Box sx={{ '& > *:not(:last-child)': { mb: 3 } }}>{children}</Box>
+      </Stack>
     </Box>
   );
 };

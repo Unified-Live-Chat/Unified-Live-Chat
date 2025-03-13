@@ -1,6 +1,6 @@
 import './styles.css';
 import '../service.css';
-import twitchLogo from '@/assets/glitch_flat_purple.png';
+import TwitchLogo from '@/assets/twitch';
 import Stack from '@mui/material/Stack';
 import { OAuthButton, authenticate } from '../service-components';
 import AccountIcon, { UserRole } from '@/components/AccountIcon';
@@ -14,11 +14,7 @@ function Twitch() {
     <>
       <div className="service twitch">
         <Stack direction="row" spacing={3} className="top-bar">
-          <img
-            src={twitchLogo}
-            alt="Twitch Logo"
-            style={{ width: '45px', height: '54px' }}
-          />
+          <TwitchLogo style={{ width: '50px', height: '50px' }} />
 
           <AccountIcon serviceAccount={null} userRole={UserRole.Streamer} />
         </Stack>
@@ -29,9 +25,7 @@ function Twitch() {
           onClick={async () => {
             await authenticate(provider, twitchScopes);
           }}
-          startIcon={
-            <img src={twitchLogo} style={{ width: '16px', height: 'auto' }} />
-          }
+          startIcon={<TwitchLogo style={{ width: '16px', height: '16px' }} />}
         >
           Sign in with Twitch
         </OAuthButton>

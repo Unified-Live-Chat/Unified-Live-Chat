@@ -1,8 +1,9 @@
 import './styles.css';
 
 import { Badge, Avatar, Stack, Divider } from '@mui/material';
-import youtubeLogo from '@/assets/yt_icon_rgb.png';
-import twitchLogo from '@/assets/glitch_flat_purple.png';
+
+import YouTubeLogo from '@/assets/youtube';
+import TwitchLogo from '@/assets/twitch';
 import editSquare from '@/assets/edit_square.svg';
 
 import { Person } from '@mui/icons-material';
@@ -43,11 +44,7 @@ function Dashboard() {
             }}
           >
             <Stack direction="row" spacing={0.5}>
-              <img
-                src={youtubeLogo}
-                alt="YouTube Logo"
-                style={{ width: '22.66px', height: '16px' }}
-              />
+              <YouTubeLogo style={{ width: '20px', height: '20px' }} />
               <p>YouTube Account Name</p>
               <div
                 // onClick={openSettings}
@@ -68,11 +65,7 @@ function Dashboard() {
                 alignItems: 'center',
               }}
             >
-              <img
-                src={twitchLogo}
-                alt="Twitch Logo"
-                style={{ width: '18.33px', height: '22px' }}
-              />
+              <TwitchLogo style={{ width: '20px', height: '20px' }} />
               <p>Twitch Account Name</p>
               <div
                 // onClick={openSettings}
