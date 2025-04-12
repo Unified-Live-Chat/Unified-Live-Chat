@@ -44,5 +44,5 @@ export const OAuthButton = styled(Button)({
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   margin: 10,
   flex: 'none',
-  width: 'auto',
+  width: '200px',
 });
