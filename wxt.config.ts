@@ -2,7 +2,6 @@ import { defineConfig } from 'wxt';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: 'chrome',
   modules: ['@wxt-dev/module-react'],
   manifest: {
     name: 'Unified Live Chat',
@@ -20,6 +19,9 @@ export default defineConfig({
         matches: ['*://*.twitch.tv/*', '*://*.youtube.com/*'],
       },
     ],
+    content_security_policy: {
+      extension_pages: "script-src 'self' http://localhost:3000; object-src 'self'"
+    },
     permissions: [
       'storage',
       'tabs',

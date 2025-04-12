@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import { blue, grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 import { createClient, Provider } from '@supabase/supabase-js';
-import { storage } from 'wxt/storage';
+import { storage } from '#imports';
 
 const supabaseUrl = import.meta.env.WXT_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY;
