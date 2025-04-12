@@ -13,7 +13,8 @@
     "zip:firefox": "wxt zip -b firefox",
     "compile": "tsc --noEmit",
     "postinstall": "wxt prepare",
-    "prepare": "husky && husky install"
+    "prepare": "husky && husky install",
+    "preinstall": "npx only-allow pnpm"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

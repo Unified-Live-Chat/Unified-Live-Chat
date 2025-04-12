@@ -15,4 +15,4 @@ package.json
 README.node_modules
 tsconfig.json
 wxt.config.ts
-yarn.lock
+pnpm-lock.yaml
