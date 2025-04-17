@@ -1,5 +1,5 @@
 import YouTubeLogo from '@/components/icons/services/YouTubeLogo';
-import AccountIcon, { UserRole } from '@/components/popup/AccountIcon';
+import AccountIcon, { UserRole } from '@/components/popup/service/AccountIcon';
 import GoogleLogo from '@/components/icons/services/GoogleLogo';
 
 import { OAuthButton } from './service-components';

@@ -1,7 +1,6 @@
 import './App.css';
-import '~/tailwind.css';
 
-import Dashboard from '@/components/popup/Dashboard';
+import Dashboard from '@/components/popup/dashboard/Dashboard';
 import ServicePanel from '@/components/popup/service/ServicePanel';
 import { IconButton, Stack } from '@mui/material';
 import Settings from '@mui/icons-material/Settings';

@@ -1,9 +1,11 @@
 import { ServiceAccount } from '@/utils/service-account';
-import BuildIcon from '@mui/icons-material/Build';
-import VideocamIcon from '@mui/icons-material/Videocam';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import UserIcon from '../icons/assets/UserIcon';
 
+import UserIcon from '../../icons/assets/UserIcon';
+import BuildIcon from '../../icons/assets/BuildIcon';
+import VideoCamIcon from '../../icons/assets/VideoCamIcon';
+
+//TODO: Move these to utils folder?
 export enum UserRole {
   Viewer,
   Moderator,
@@ -29,16 +31,14 @@ const UserRoleDisplay: React.FC<UserRoleProps> = ({ userRole }) => {
   if (userRole == UserRole.Streamer) {
     return (
       <div className="flex flex-row items-center">
-        <VideocamIcon
-          sx={{ fontSize: 14, paddingRight: '4px', color: 'red' }}
-        />
+        <VideoCamIcon />
         <p>{'Streamer'}</p>
       </div>
     );
   } else if (userRole == UserRole.Moderator) {
     return (
       <div className="flex flex-row items-center">
-        <BuildIcon sx={{ fontSize: 14, paddingRight: '4px', color: 'green' }} />
+        <BuildIcon />
         <p>{'Moderator'}</p>
       </div>
     );

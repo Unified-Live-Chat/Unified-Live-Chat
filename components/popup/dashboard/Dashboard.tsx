@@ -1,9 +1,8 @@
 import { Stack, Divider } from '@mui/material';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-// import { Badge } from "@mui/material"
 import { Badge } from '@/components/ui/badge';
 
-import UserIcon from '../icons/assets/UserIcon';
+import UserIcon from '../../icons/assets/UserIcon';
 
 import YouTubeLogo from '@/components/icons/services/YouTubeLogo';
 import TwitchLogo from '@/components/icons/services/TwitchLogo';
@@ -28,19 +27,6 @@ function Dashboard() {
             <Badge variant="outline" className="bg-live-red">
               Live
             </Badge>
-
-            {/* <Badge
-              overlap="circular"
-              anchorOrigin={{ vertical: 'bottom' }}
-              badgeContent={'Live'}
-              color="error"
-              sx={{
-                '& .MuiBadge-badge': {
-                  backgroundColor: 'red',
-                },
-              }}
-              className="bottom-4"
-            /> */}
           </div>
 
           <Stack
