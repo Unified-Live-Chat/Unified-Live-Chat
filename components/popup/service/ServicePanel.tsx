@@ -1,7 +1,7 @@
 import { Stack, Divider } from '@mui/material';
 
-import Youtube from '../service/Youtube';
-import Twitch from '../service/Twitch';
+import Youtube from './Youtube';
+import Twitch from './Twitch';
 import React, { JSX } from 'react';
 
 function ServicePanel() {

@@ -1,9 +1,12 @@
-import './styles.css';
+import { Stack, Divider } from '@mui/material';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+// import { Badge } from "@mui/material"
+import { Badge } from '@/components/ui/badge';
 
-import { Badge, Avatar, Stack, Divider } from '@mui/material';
+import UserIcon from '../icons/assets/UserIcon';
 
-import YouTubeLogo from '@/assets/youtube';
-import TwitchLogo from '@/assets/twitch';
+import YouTubeLogo from '@/components/icons/services/YouTubeLogo';
+import TwitchLogo from '@/components/icons/services/TwitchLogo';
 import editSquare from '@/assets/edit_square.svg';
 
 import { Person } from '@mui/icons-material';
@@ -11,28 +14,33 @@ import { Person } from '@mui/icons-material';
 function Dashboard() {
   return (
     <>
-      <div className="dashboard">
+      <div className="w-full min-h-19">
         <Stack direction="row">
-          <div className="container">
-            <div>
-              <Avatar
-                sx={{ width: 80, height: 80 }}
-                className="avatar"
-              ></Avatar>
+          {/* <div className="myContainer"> */}
+          <div className="flex justify-center items-center relative m-800 bg-blue-500 ">
+            <Avatar className="h-24 w-24">
+              <AvatarImage src="" className="h-16 w-16" />
+              <AvatarFallback>
+                <UserIcon className="h-16 w-16" />
+              </AvatarFallback>
+            </Avatar>
 
-              <Badge
-                overlap="circular"
-                anchorOrigin={{ vertical: 'bottom' }}
-                badgeContent={'Live'}
-                color="error"
-                sx={{
-                  '& .MuiBadge-badge': {
-                    backgroundColor: 'red',
-                  },
-                }}
-                className="overlay"
-              ></Badge>
-            </div>
+            <Badge variant="outline" className="bg-live-red">
+              Live
+            </Badge>
+
+            {/* <Badge
+              overlap="circular"
+              anchorOrigin={{ vertical: 'bottom' }}
+              badgeContent={'Live'}
+              color="error"
+              sx={{
+                '& .MuiBadge-badge': {
+                  backgroundColor: 'red',
+                },
+              }}
+              className="bottom-4"
+            /> */}
           </div>
 
           <Stack

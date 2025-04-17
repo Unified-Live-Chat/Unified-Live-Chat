@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stack, Typography } from '@mui/material';
-import YouTubeLogo from '@/assets/youtube';
+import YouTubeLogo from '@/components/icons/services/YouTubeLogo';
 
 export const YouTubeAccountItem: React.FC = () => {
   return (

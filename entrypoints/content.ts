@@ -28,11 +28,11 @@ export default defineContentScript({
     const currentUrl: URL | null = new URL(window.location.href);
 
     if (currentUrl && currentUrl.hostname === youtubeUrl) {
-      injectScript('/youtube-injection-script.js', {
+      injectScript('/youtube-main-world.js', {
         keepInDom: true,
       });
     } else if (currentUrl && currentUrl.hostname === twitchUrl) {
-      injectScript('/twitch-injection-script.js', {
+      injectScript('/twitch-main-world.js', {
         keepInDom: true,
       });
     } else {

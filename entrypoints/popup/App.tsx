@@ -1,7 +1,8 @@
 import './App.css';
+import '~/tailwind.css';
 
-import Dashboard from '@/components/Dashboard';
-import ServicePanel from '@/components/ServicePanel';
+import Dashboard from '@/components/popup/Dashboard';
+import ServicePanel from '@/components/popup/service/ServicePanel';
 import { IconButton, Stack } from '@mui/material';
 import Settings from '@mui/icons-material/Settings';
 import { twitchUrl, youtubeUrl } from '@/utils/constants';
@@ -42,8 +43,8 @@ function App() {
         onClick={openSettings}
         sx={{
           position: 'absolute',
-          top: 5,
-          right: 5,
+          top: 4,
+          right: 4,
         }}
       >
         <Settings />

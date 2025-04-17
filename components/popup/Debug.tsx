@@ -1,3 +1,7 @@
+/**
+ * A simple debug UI that can pass a username and message
+ * into the injection script
+ */
 function Debug() {
   const [username, setUsername] = useState('ExampleUsername');
   const [message, setMessage] = useState('Example message');
@@ -6,7 +10,7 @@ function Debug() {
     <>
       {/* Input field for Username */}
       <input
-        className="usernameInput"
+        className="flex-none w-auto mx-[10%] mb-1"
         type="text"
         placeholder="Enter Username"
         // Update the username state when user types in input
@@ -15,7 +19,7 @@ function Debug() {
 
       {/* Input field for Message */}
       <input
-        className="messageInput"
+        className="flex-none w-auto mx-[10%] mb-1"
         type="text"
         placeholder="Enter Message"
         // Update the message state when user types in input
@@ -23,7 +27,7 @@ function Debug() {
       />
 
       <input
-        className="message"
+        className="flex-none w-auto mx-[10%] mb-1"
         type="button"
         value="Send Message"
         onClick={() => {
