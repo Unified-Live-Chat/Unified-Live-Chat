@@ -1,7 +1,7 @@
 import './settings-app.css';
 
 import { useState } from 'react';
-import { Stack, Divider } from '@mui/material';
+import { Stack, Divider } from '@mui/material'; //TODO: Remove
 import { Person, AutoAwesome, Videocam } from '@mui/icons-material';
 import { Sidebar } from './components/Sidebar';
 import { ProfilesPanel } from './components/ProfilesPanel';

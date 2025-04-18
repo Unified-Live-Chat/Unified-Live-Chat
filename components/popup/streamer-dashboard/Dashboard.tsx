@@ -1,4 +1,4 @@
-import { Stack, Divider } from '@mui/material';
+import { Stack, Divider } from '@mui/material'; //TODO: Remove
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 
@@ -16,7 +16,7 @@ function Dashboard() {
       <div className="w-full min-h-19">
         <Stack direction="row">
           {/* <div className="myContainer"> */}
-          <div className="flex justify-center items-center relative m-800 bg-blue-500 ">
+          <div className="flex justify-center items-center relative m-8 bg-blue-500 ">
             <Avatar className="h-24 w-24">
               <AvatarImage src="" className="h-16 w-16" />
               <AvatarFallback>
@@ -72,7 +72,7 @@ function Dashboard() {
             </Stack>
           </Stack>
         </Stack>
-        <Divider variant="middle" />
+        {/* <Divider variant="middle" /> */}
       </div>
     </>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, List, Stack } from '@mui/material';
+import { Typography, List, Stack } from '@mui/material'; //TODO: Remove
 import { MenuItem, MenuItemProps } from './MenuItem';
 
 interface SidebarProps {

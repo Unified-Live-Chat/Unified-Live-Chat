@@ -1,4 +1,4 @@
-import { Typography, Divider, Stack } from '@mui/material';
+import { Typography, Divider, Stack } from '@mui/material'; //TODO: Remove
 import UnifiedLiveChatLogo from '@/assets/unified_live_chat.png';
 
 function Header() {

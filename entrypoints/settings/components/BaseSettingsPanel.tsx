@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Typography, Box, Stack, Divider } from '@mui/material';
+import { Typography, Box, Stack, Divider } from '@mui/material'; //TODO: Remove
 
 export interface BaseSettingsPanelProps {
   title: string;

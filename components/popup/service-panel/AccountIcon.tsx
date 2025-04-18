@@ -1,21 +1,9 @@
-import { ServiceAccount } from '@/utils/service-account';
+import { ServiceAccount } from '@/utils/constants';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import UserIcon from '../../icons/assets/UserIcon';
 import BuildIcon from '../../icons/assets/BuildIcon';
 import VideoCamIcon from '../../icons/assets/VideoCamIcon';
-
-//TODO: Move these to utils folder?
-export enum UserRole {
-  Viewer,
-  Moderator,
-  Streamer,
-}
-
-export interface AccountIconProps {
-  serviceAccount?: ServiceAccount | null;
-  userRole: UserRole;
-}
 
 interface UserRoleProps {
   userRole: UserRole;
@@ -49,16 +37,18 @@ const UserRoleDisplay: React.FC<UserRoleProps> = ({ userRole }) => {
   }
 };
 
+interface AccountIconProps {
+  serviceAccount?: ServiceAccount;
+}
+
 /**
  * Visualizes the account that the user is logged in as with
  * their profile picture, name, and role in the stream.
  * @param {AccountIconProps} props - Basic account information.
  * @returns {JSX.Element} The account information component.
  */
-function AccountIcon(props: AccountIconProps) {
-  const account = props.serviceAccount;
-
-  if (account) {
+function AccountIcon({ serviceAccount }: AccountIconProps) {
+  if (serviceAccount) {
     return (
       <div className="flex items-center space-x-2">
         <Avatar className="h-10 w-10">
@@ -68,8 +58,8 @@ function AccountIcon(props: AccountIconProps) {
           </AvatarFallback>
         </Avatar>
         <div>
-          <p>{account.name}</p>
-          <UserRoleDisplay userRole={props.userRole} />
+          <p>{serviceAccount.name}</p>
+          <UserRoleDisplay userRole={serviceAccount.role} />
         </div>
       </div>
     );
