@@ -1,7 +1,7 @@
 import './App.css';
 
-import Dashboard from '@/components/popup/dashboard/Dashboard';
-import ServicePanel from '@/components/popup/service/ServicePanel';
+import Dashboard from '@/components/popup/streamer-dashboard/Dashboard';
+import ServicePanel from '@/components/popup/user-accounts/ServicePanel';
 import { IconButton, Stack } from '@mui/material';
 import Settings from '@mui/icons-material/Settings';
 import { twitchUrl, youtubeUrl } from '@/utils/constants';

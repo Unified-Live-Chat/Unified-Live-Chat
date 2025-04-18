@@ -1,6 +1,8 @@
 import TwitchLogo from '@/components/icons/services/TwitchLogo';
 import { OAuthButton, authenticate } from './service-components';
-import AccountIcon, { UserRole } from '@/components/popup/service/AccountIcon';
+import AccountIcon, {
+  UserRole,
+} from '@/components/popup/user-accounts/AccountIcon';
 import { Provider } from '@supabase/supabase-js';
 
 const provider = 'twitch' as Provider;
