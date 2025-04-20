@@ -1,54 +1,44 @@
-import './App.css';
-
-import Dashboard from '@/components/Dashboard';
-import ServicePanel from '@/components/ServicePanel';
-import { IconButton, Stack } from '@mui/material';
+import Dashboard from '@/components/popup/streamer-dashboard/Dashboard';
+import ServicePanel from '@/components/popup/service-panel/ServicePanel';
 import Settings from '@mui/icons-material/Settings';
-import { twitchUrl, youtubeUrl } from '@/utils/constants';
 
-const isStreamingService = (url: URL | null): boolean => {
-  if (!url) return false;
+import { getService } from '@/utils/functions';
 
-  return url.hostname.includes(twitchUrl) || url.hostname.includes(youtubeUrl);
-};
+import { Button } from '@/components/ui/button';
+import { Service } from '@/utils/constants';
 
 const openSettings = () => {
   chrome.runtime.sendMessage({ type: 'open-settings' });
 };
 
 function App() {
-  const [currentUrl, setCurrentUrl] = useState<URL | null>(null);
-
+  // Get the current service that the user is on.
+  const [currentService, setCurrentService] = useState<Service | undefined>(
+    undefined,
+  );
   useEffect(() => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-      const urlStr = tabs[0]?.url ?? '';
-      if (urlStr) {
-        setCurrentUrl(new URL(urlStr));
-      }
-    });
+    getService().then((service) => setCurrentService(service));
   }, []);
 
-  const isValidService = isStreamingService(currentUrl);
-
   return (
-    <>
-      <Stack>
-        {isValidService && <Dashboard />}
-        <ServicePanel />
-      </Stack>
+    <div className="flex flex-col items-center justify-center">
+      {currentService && (
+        <>
+          <Dashboard />
+          <div className="border-t w-[90%] border-gray-300 rounded" />
+        </>
+      )}
+      <ServicePanel currentService={currentService} />
 
-      <IconButton
-        aria-label="Settings"
+      <Button
         onClick={openSettings}
-        sx={{
-          position: 'absolute',
-          top: 5,
-          right: 5,
-        }}
+        variant="default"
+        size="icon"
+        className="absolute top-1 right-1"
       >
         <Settings />
-      </IconButton>
-    </>
+      </Button>
+    </div>
   );
 }
 

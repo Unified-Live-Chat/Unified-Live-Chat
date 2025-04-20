@@ -1,4 +1,5 @@
 import { defineConfig } from 'wxt';
+import tailwindcss from "@tailwindcss/vite";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
@@ -8,14 +9,14 @@ export default defineConfig({
     content_scripts: [
       {
         all_frames: true,
-        js: ['youtube-injection-script.js', 'twitch-injection-script.js'],
+        js: ['youtube-main-world.js', 'twitch-main-world.js'],
         matches: ['*://*.twitch.tv/*', '*://*.youtube.com/*'],
 
       }
     ],
     web_accessible_resources: [
       {
-        resources: ['twitch-injection-script.js', 'youtube-injection-script.js'],
+        resources: ['twitch-main-world.js', 'youtube-main-world.js'],
         matches: ['*://*.twitch.tv/*', '*://*.youtube.com/*'],
       },
     ],
@@ -39,4 +40,7 @@ export default defineConfig({
       scopes: ['profile email', 'https://www.googleapis.com/auth/contacts'],
     },
   },
+  vite: () => ({
+    plugins: [tailwindcss()],
+  }),
 });

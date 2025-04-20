@@ -1,14 +1,12 @@
-import './settings-app.css';
-
 import { useState } from 'react';
-import { Stack, Divider } from '@mui/material';
 import { Person, AutoAwesome, Videocam } from '@mui/icons-material';
-import { Sidebar } from './components/Sidebar';
-import { ProfilesPanel } from './components/ProfilesPanel';
-import { PremiumPanel } from './components/PremiumPanel';
-import { CreatorPanel } from './components/CreatorPanel';
-import { MenuItemProps } from './components/MenuItem';
-import Header from './components/Header';
+
+import { Sidebar } from '@/components/settings/sidebar/Sidebar';
+import { ProfilesPanel } from '@/components/settings/profiles/ProfilesPanel';
+import { PremiumPanel } from '@/components/settings/premium/PremiumPanel';
+import { CreatorPanel } from '@/components/settings/creators/CreatorPanel';
+import { MenuItemProps } from '@/components/settings/sidebar/MenuItem';
+import Header from '@/components/settings/Header';
 
 function SettingsApp() {
   const [activeTab, setActiveTab] = useState('profile');
@@ -34,18 +32,18 @@ function SettingsApp() {
 
   return (
     <>
-      <Header></Header>
-      <Stack direction="row">
+      <Header />
+      <div className="flex flex-row">
         <Sidebar
           activeTab={activeTab}
           menuItems={menuItems}
           onTabChange={setActiveTab}
         />
-        <Divider orientation="vertical" flexItem />
-        <div className="outer">
-          <div className="inner">{renderActivePanel()}</div>
+        <div className="border-r h-47 border-gray-300" />
+        <div className="flex-1 w-0 flex justify-center gap-4 py-2 px-4">
+          <div className="flex flex-col w-200">{renderActivePanel()}</div>
         </div>
-      </Stack>
+      </div>
     </>
   );
 }
