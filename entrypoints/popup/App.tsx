@@ -5,7 +5,6 @@ import Settings from '@mui/icons-material/Settings';
 import { getService } from '@/utils/functions';
 
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import { Service } from '@/utils/constants';
 
 const openSettings = () => {
@@ -22,11 +21,11 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       {currentService && (
         <>
           <Dashboard />
-          <Separator className="w-19/20" />
+          <div className="border-1 w-[90%] border-gray-300 rounded" />
         </>
       )}
       <ServicePanel currentService={currentService} />
@@ -39,7 +38,7 @@ function App() {
       >
         <Settings />
       </Button>
-    </>
+    </div>
   );
 }
 

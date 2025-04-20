@@ -1,5 +1,4 @@
 import React from 'react';
-import { Separator } from '@/components/ui/separator';
 import { Service, Services } from '@/utils/constants';
 import ServiceDisplay from './ServiceDisplay';
 
@@ -21,11 +20,11 @@ function ServicePanel({ currentService }: ServicePanelProps) {
   );
 
   return (
-    <div className="flex flex-row items-center justify-center">
+    <div className="flex flex-row items-center justify-center m-2">
       {currentService && (
         <>
           <ServiceDisplay service={currentService} />
-          <Separator orientation="vertical" decorative className="min-h-full" />
+          <div className="border-1 h-20 mx-4 border-gray-300" />
         </>
       )}
       <div className="flex flex-col items-center justify-center">
@@ -33,11 +32,7 @@ function ServicePanel({ currentService }: ServicePanelProps) {
           <React.Fragment key={service.name}>
             <ServiceDisplay service={service} />
             {index < alternativeServices.length - 1 && (
-              <Separator
-                orientation="horizontal"
-                decorative
-                className="min-w-full"
-              />
+              <div className="border-1 w-full my-4 border-gray-300" />
             )}
           </React.Fragment>
         ))}

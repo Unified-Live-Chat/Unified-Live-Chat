@@ -13,14 +13,14 @@ interface ServiceAccountProps {
  * the user's information, and a OAuth button if they are not signed in
  *
  * @param service The service to display
- * @param account The account assiciated with this service or undefined if there is none.
+ * @param account The account associated with this service or undefined if there is none.
  * @returns The service UI.
  */
 function ServiceDisplay({ service, account }: ServiceAccountProps) {
   return (
     <>
       <div className="flex flex-col">
-        <div className="flex flex-row gap-5 mt-5 mb-1 justify-center items-center">
+        <div className="flex flex-row gap-5 m2-5 mb-1 justify-center items-center">
           <service.icon className="w-13 h-13" />
 
           <AccountIcon serviceAccount={account} />

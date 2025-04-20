@@ -38,7 +38,7 @@ export function OAuthButton({ service, className }: OAuthServiceProps) {
       }}
     >
       <service.authIcon className="w-4 h-4" />
-      <span>Sign in with {service.name}</span>
+      <span>Sign in to {service.name}</span>
     </Button>
   );
 }
