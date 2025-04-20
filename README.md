@@ -35,8 +35,9 @@ For more information about general WXT information, view their [project structur
     - `services/` - The service's logos
     - `assets/` - Everything else
   - `popup/` - The components for the popup menu
-    - `service/` - Components for the integrated services
-  - `settings/` - The components for the settings screen
+    - `service-panel/` - Components for the streamer information
+    - `streamer-dashboard/` - Components for the user information
+  - `settings/` - The components for the settings component
   - `ui/` - shadcn components
 - `entrypoints/` - All of the unique items in the app
   - `popup/` - The popup displayed when the user clicks the extension icon
