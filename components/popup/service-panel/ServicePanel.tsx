@@ -24,7 +24,7 @@ function ServicePanel({ currentService }: ServicePanelProps) {
       {currentService && (
         <>
           <ServiceDisplay service={currentService} />
-          <div className="border-1 h-20 mx-4 border-gray-300" />
+          <div className="border-r h-20 mx-4 border-gray-300" />
         </>
       )}
       <div className="flex flex-col items-center justify-center">
@@ -32,7 +32,7 @@ function ServicePanel({ currentService }: ServicePanelProps) {
           <React.Fragment key={service.name}>
             <ServiceDisplay service={service} />
             {index < alternativeServices.length - 1 && (
-              <div className="border-1 w-full my-4 border-gray-300" />
+              <div className="border-t w-full my-4 border-gray-300" />
             )}
           </React.Fragment>
         ))}

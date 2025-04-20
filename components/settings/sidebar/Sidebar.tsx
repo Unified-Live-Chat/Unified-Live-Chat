@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography, List, Stack } from '@mui/material'; //TODO: Remove
 import { MenuItem, MenuItemProps } from './MenuItem';
 
 interface SidebarProps {
@@ -14,15 +13,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onTabChange,
 }) => {
   return (
-    <Stack
-      direction="column"
-      sx={{
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-      }}
-    >
-      <Typography sx={{ fontWeight: 600, mt: 2 }}>Account Settings</Typography>
-      <List>
+    <div className="flex flex-col items-center justify-start">
+      <p className="font-semibold text-lg my-2">Account Settings</p>
+      <div className="flex flex-col">
         {menuItems.map((item) => (
           <MenuItem
             key={item.id}
@@ -31,7 +24,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => onTabChange(item.id)}
           />
         ))}
-      </List>
-    </Stack>
+      </div>
+    </div>
   );
 };

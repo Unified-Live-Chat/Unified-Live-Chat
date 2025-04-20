@@ -15,7 +15,7 @@ interface ConnectionProps {
  */
 function Connection({ service }: ConnectionProps) {
   return (
-    <div className="flex flex-row space-x-1">
+    <div className="flex flex-row space-x-1 justify-center items-center">
       {/* Service icon display */}
       <service.icon className="w-5 h-5" />
 

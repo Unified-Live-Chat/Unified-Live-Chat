@@ -1,5 +1,5 @@
 import React from 'react';
-import { BaseSettingsPanel } from './BaseSettingsPanel';
+import { BaseSettingsPanel } from '@/components/settings/BaseSettingsPanel';
 
 export const PremiumPanel: React.FC = () => {
   return (

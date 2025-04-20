@@ -1,9 +1,9 @@
 import { ServiceAccount } from '@/utils/constants';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-import UserIcon from '../../icons/assets/UserIcon';
-import BuildIcon from '../../icons/assets/BuildIcon';
-import VideoCamIcon from '../../icons/assets/VideoCamIcon';
+import UserIcon from '@/components/icons/assets/UserIcon';
+import BuildIcon from '@/components/icons/assets/BuildIcon';
+import VideoCamIcon from '@/components/icons/assets/VideoCamIcon';
 
 interface UserRoleProps {
   userRole: UserRole;

@@ -25,7 +25,7 @@ function App() {
       {currentService && (
         <>
           <Dashboard />
-          <div className="border-1 w-[90%] border-gray-300 rounded" />
+          <div className="border-t w-[90%] border-gray-300 rounded" />
         </>
       )}
       <ServicePanel currentService={currentService} />

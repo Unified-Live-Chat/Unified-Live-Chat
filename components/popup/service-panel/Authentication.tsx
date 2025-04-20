@@ -1,6 +1,3 @@
-// import Button from '@mui/material/Button'; //TODO: Remove
-// import { blue, grey } from '@mui/material/colors'; //TODO: Remove
-// import { styled } from '@mui/material/styles'; //TODO: Remove
 import { createClient, Provider } from '@supabase/supabase-js';
 import { storage } from '#imports';
 
