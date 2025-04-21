@@ -1,9 +1,12 @@
-import { Provider } from '@supabase/supabase-js';
+import { Provider, SupabaseClient } from '@supabase/supabase-js';
 import { ComponentType, SVGProps } from 'react';
 
 import YouTubeLogo from '@/components/icons/services/YouTubeLogo';
 import GoogleLogo from '@/components/icons/services/GoogleLogo';
 import TwitchLogo from '@/components/icons/services/TwitchLogo';
+
+import { authenticateTwitch } from './twitch-helper';
+import { authenticateYouTube } from './youtube-helper';
 
 // User
 export enum UserRole {
@@ -28,6 +31,11 @@ export class Service {
   scopes: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   authIcon: ComponentType<SVGProps<SVGSVGElement>>;
+  authenticate: (
+    supabase: SupabaseClient,
+    provider: Provider,
+    scopes: string,
+  ) => void;
   constructor(
     name: string,
     url: URL,
@@ -35,6 +43,11 @@ export class Service {
     scopes: string,
     icon: ComponentType<SVGProps<SVGSVGElement>>,
     authIcon: ComponentType<SVGProps<SVGSVGElement>>,
+    authenticate: (
+      supabase: SupabaseClient,
+      provider: Provider,
+      scopes: string,
+    ) => void,
   ) {
     this.name = name;
     this.url = url;
@@ -42,6 +55,7 @@ export class Service {
     this.scopes = scopes;
     this.icon = icon;
     this.authIcon = authIcon;
+    this.authenticate = authenticate;
   }
 }
 
@@ -53,6 +67,7 @@ export const Services = {
     'user:write:chat user:read:chat',
     TwitchLogo,
     TwitchLogo,
+    authenticateTwitch,
   ),
   youtube: new Service(
     'YouTube',
@@ -61,5 +76,6 @@ export const Services = {
     '',
     YouTubeLogo,
     GoogleLogo,
+    authenticateYouTube,
   ),
 } as const;

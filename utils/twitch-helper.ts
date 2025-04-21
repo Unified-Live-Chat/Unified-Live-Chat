@@ -1,3 +1,23 @@
+import { Provider, SupabaseClient } from '@supabase/supabase-js';
+
+export async function authenticateTwitch(
+  supabase: SupabaseClient,
+  provider: Provider,
+  scopes: string,
+) {
+  const { data, error } = await supabase.auth.linkIdentity({
+    provider: provider,
+    options: {
+      scopes: scopes,
+      redirectTo: chrome.identity.getRedirectURL(),
+    },
+  });
+
+  if (error) throw error;
+
+  await chrome.tabs.create({ url: data.url });
+}
+
 // I will need to work on making this a fully
 // customable class once more features are in.
 export function twitchMessageBuilder(username: string, text: string) {

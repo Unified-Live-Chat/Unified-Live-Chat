@@ -1,5 +1,4 @@
-import { createClient, Provider } from '@supabase/supabase-js';
-import { storage } from '#imports';
+import { createClient } from '@supabase/supabase-js';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -31,7 +30,7 @@ export function OAuthButton({ service, className }: OAuthServiceProps) {
       variant="outline"
       className={cn('flex items-center gap-2 w-full', className)}
       onClick={async () => {
-        await authenticate(service.provider, service.scopes);
+        await service.authenticate(supabase, service.provider, service.scopes);
       }}
     >
       <service.authIcon className="w-4 h-4" />
@@ -41,16 +40,3 @@ export function OAuthButton({ service, className }: OAuthServiceProps) {
 }
 
 // This is a function I made for Twitch, it might not work in a general use case.
-export async function authenticate(provider: Provider, scopes: string) {
-  storage.setItem('session:provider', provider);
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: provider,
-    options: {
-      redirectTo: chrome.identity.getRedirectURL(),
-      scopes: scopes,
-    },
-  });
-  if (error) throw error;
-
-  await chrome.tabs.create({ url: data.url });
-}

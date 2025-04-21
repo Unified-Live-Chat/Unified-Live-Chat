@@ -1,6 +1,7 @@
 # Unified Live Chat Extension
 
 ## Development
+
 ### Getting Started
 
 1. [Download PNPM](https://pnpm.io/).
@@ -14,6 +15,7 @@
 I'm only testing on Chrome for now. I plan to test on Brave, Edge, and port to Firefox when it's closer to complete.
 
 #### Main Libraries
+
 - Package Manager: [PNPM](https://pnpm.io/)
 - Extension Framework: [WXT](https://wxt.dev/)
 - JS Framework: [React](https://react.dev/)
@@ -21,17 +23,18 @@ I'm only testing on Chrome for now. I plan to test on Brave, Edge, and port to F
 - Components: [shadcn](https://ui.shadcn.com/)
 
 #### Dev Tools
+
 - Linting: [ESLint](https://eslint.org/)
 - Formatting: [Prettier](https://prettier.io/)
 - Pre-commit: [Husky](https://typicode.github.io/husky/)
 
 ### Project Structure
 
-For more information about general WXT information, view their [project structure guide](https://wxt.dev/guide/essentials/project-structure.html) 
+For more information about general WXT information, view their [project structure guide](https://wxt.dev/guide/essentials/project-structure.html)
 
 - `.husky/` - Pre-commit check runner
 - `components/` - The React components used in the project
-  - `icons/` -  The images of the project
+  - `icons/` - The images of the project
     - `services/` - The service's logos
     - `assets/` - Everything else
   - `popup/` - The components for the popup menu
