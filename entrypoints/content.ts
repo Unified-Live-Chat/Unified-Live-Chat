@@ -3,7 +3,7 @@ import { Service } from '@/utils/constants';
 export default defineContentScript({
   matches: ['*://*.youtube.com/*', '*://*.twitch.tv/*'],
   allFrames: true,
-  main() {
+  async main() {
     /**
      * Sends a message from the content script to the injection script.
      * @param service The service to send the message to.

@@ -20,21 +20,24 @@ interface OAuthServiceProps {
  * using OAuth services.
  *
  * @param service The service that this OAuth button provides for.
- * @param className optional CSS override .
+ * @param className optional CSS override.
  * @returns A button that, when clicked, start the OAuth process
  * for the designated service.
  */
 export function OAuthButton({ service, className }: OAuthServiceProps) {
+  console.log(service.name, supabase.auth.getSession());
+
   return (
     <Button
       variant="outline"
       className={cn('flex items-center gap-2 w-full', className)}
       onClick={async () => {
+        storage.setItem('session:provider', service.name);
         await service.authenticate(supabase, service.provider, service.scopes);
       }}
     >
       <service.authIcon className="w-4 h-4" />
-      <span>Sign in to {service.name}</span>
+      <span>Sign in to {service.providerName}</span>
     </Button>
   );
 }

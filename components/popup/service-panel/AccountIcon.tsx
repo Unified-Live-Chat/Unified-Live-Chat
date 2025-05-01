@@ -1,4 +1,3 @@
-import { ServiceAccount } from '@/utils/constants';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import UserIcon from '@/components/icons/assets/UserIcon';
@@ -38,7 +37,8 @@ const UserRoleDisplay: React.FC<UserRoleProps> = ({ userRole }) => {
 };
 
 interface AccountIconProps {
-  serviceAccount?: ServiceAccount;
+  name?: string;
+  icon?: string;
 }
 
 /**
@@ -47,20 +47,20 @@ interface AccountIconProps {
  * @param {AccountIconProps} props - Basic account information.
  * @returns {JSX.Element} The account information component.
  */
-function AccountIcon({ serviceAccount }: AccountIconProps) {
-  if (serviceAccount) {
+function AccountIcon({ name, icon }: AccountIconProps) {
+  if (name && icon) {
     return (
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-col items-center">
         <Avatar className="h-10 w-10">
-          <AvatarImage src="" />
+          <AvatarImage src={icon} />
           <AvatarFallback className="h-10 w-10">
             <UserIcon className="w-10 h-10" />
           </AvatarFallback>
         </Avatar>
-        <div>
-          <p>{serviceAccount.name}</p>
-          <UserRoleDisplay userRole={serviceAccount.role} />
-        </div>
+        <>
+          <p>{name}</p>
+          <UserRoleDisplay userRole={UserRole.Viewer} />
+        </>
       </div>
     );
   } else {

@@ -34,7 +34,12 @@ export default [
         'error',
         { argsIgnorePattern: '_' },
       ],
-      'prettier/prettier': 'error',
+      'prettier/prettier': [
+        'error',
+        {
+          endOfLine: 'auto',
+        },
+      ],
     },
   },
   {

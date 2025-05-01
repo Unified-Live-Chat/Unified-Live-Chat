@@ -1,6 +1,7 @@
 import React from 'react';
 import { Service, Services } from '@/utils/constants';
 import ServiceDisplay from './ServiceDisplay';
+// import Debug from '../Debug';
 
 interface ServicePanelProps {
   currentService?: Service;
@@ -36,6 +37,7 @@ function ServicePanel({ currentService }: ServicePanelProps) {
             )}
           </React.Fragment>
         ))}
+        {/* <Debug /> */}
       </div>
     </div>
   );

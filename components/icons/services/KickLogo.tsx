@@ -1,0 +1,20 @@
+import type { SVGProps } from 'react';
+
+// Component name - choose something descriptive based on the icon
+const KickLogo = (props: SVGProps<SVGSVGElement>) => (
+  <svg
+    width="1em"
+    height="1em"
+    viewBox="0 0 1539.02 1539.02"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <polygon
+      points="278.26 216.86 646.7 216.86 646.7 462.48 769.51 462.48 769.51 339.67 892.32 339.67 892.32 216.86 1260.75 216.86 1260.75 585.29 1137.94 585.29 1137.94 708.1 1015.13 708.1 1015.13 830.91 1137.94 830.91 1137.94 953.72 1260.75 953.72 1260.75 1322.16 892.32 1322.16 892.32 1199.35 769.51 1199.35 769.51 1076.54 646.7 1076.54 646.7 1322.16 278.26 1322.16 278.26 216.86"
+      fill="#53fc19"
+      fillRule="evenodd"
+    />
+  </svg>
+);
+
+export default KickLogo;
