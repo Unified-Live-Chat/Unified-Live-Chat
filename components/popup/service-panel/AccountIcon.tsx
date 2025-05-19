@@ -57,10 +57,8 @@ function AccountIcon({ name, icon }: AccountIconProps) {
             <UserIcon className="w-10 h-10" />
           </AvatarFallback>
         </Avatar>
-        <>
-          <p>{name}</p>
-          <UserRoleDisplay userRole={UserRole.Viewer} />
-        </>
+        <p className="text-center">{name}</p>
+        <UserRoleDisplay userRole={UserRole.Viewer} />
       </div>
     );
   } else {

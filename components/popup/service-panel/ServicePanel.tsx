@@ -26,6 +26,10 @@ function ServicePanel({
     Array<{ service: Service; identity?: UserIdentity }>
   >([]);
 
+  const alternativeServicesStyling = currentService
+    ? 'flex flex-col items-center justify-center'
+    : 'mx-20 flex flex-col items-center justify-center';
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -59,7 +63,7 @@ function ServicePanel({
           <div className="border-r h-20 mx-4 border-gray-300" />
         </>
       )}
-      <div className="flex flex-col items-center justify-center">
+      <div className={alternativeServicesStyling}>
         {alternativeServices.map(({ service, identity }, index) => (
           <React.Fragment key={service.name}>
             <ServiceDisplay service={service} identity={identity} />
