@@ -1,5 +1,4 @@
 import { createClient, Provider } from '@supabase/supabase-js';
-import { storage } from '#imports';
 
 const supabaseUrl = import.meta.env.WXT_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY;
@@ -83,16 +82,11 @@ export default defineBackground(() => {
       }
 
       // Authenticate
-      const { data, error } = await supabase.auth.setSession({
+      const { error } = await supabase.auth.setSession({
         access_token,
         refresh_token,
       });
       if (error) throw error;
-
-      // Save data
-      const provider = await storage.getItem('session:provider');
-      const storage_key = `sync:${provider}_data` as `sync:${string}`;
-      await storage.setItem(storage_key, data);
 
       // Delete the tab
       chrome.tabs.remove(tab.id);

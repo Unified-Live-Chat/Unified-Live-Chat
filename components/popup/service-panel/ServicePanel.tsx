@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Service } from '@/utils/service-helpers/service-base';
 import ServiceDisplay from './ServiceDisplay';
-import { UserIdentity } from '@supabase/supabase-js';
+import { AuthResponse, UserIdentity } from '@supabase/supabase-js';
 import { createServiceIdentityPairs } from '@/utils/functions';
-import { supabase } from '@/lib/supabase';
 
 interface ServicePanelProps {
   currentService?: Service;
+  supabaseSession?: AuthResponse;
 }
 
 /**
@@ -15,28 +15,32 @@ interface ServicePanelProps {
  * service to log in and view their profile.
  *
  * @param currentService The service data of the website that the user is on
+ * @param supabaseSession The session data of the user
  * @returns The UI for all of the services of the app.
  */
-function ServicePanel({ currentService }: Readonly<ServicePanelProps>) {
-  const [servicePairs, setServicePairs] = useState<
+function ServicePanel({
+  currentService,
+  supabaseSession,
+}: Readonly<ServicePanelProps>) {
+  const [identityPairs, setIdentityPairs] = useState<
     Array<{ service: Service; identity?: UserIdentity }>
   >([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await supabase.getSession();
-        const identities = response.data.session?.user?.identities ?? [];
-        setServicePairs(createServiceIdentityPairs(identities));
+        const identities =
+          supabaseSession?.data.session?.user?.identities ?? [];
+        setIdentityPairs(createServiceIdentityPairs(identities));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
     fetchData();
-  }, []);
+  }, [supabaseSession]);
 
-  const alternativeServices = servicePairs.filter(
+  const alternativeServices = identityPairs.filter(
     (pair) => pair.service.name !== currentService?.name,
   );
 
@@ -47,7 +51,7 @@ function ServicePanel({ currentService }: Readonly<ServicePanelProps>) {
           <ServiceDisplay
             service={currentService}
             identity={
-              servicePairs.find(
+              identityPairs.find(
                 (pair) => pair.service.name === currentService.name,
               )?.identity
             }

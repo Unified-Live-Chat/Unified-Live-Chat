@@ -31,7 +31,6 @@ export function OAuthButton({
           console.error('Service does not support authentication');
           return;
         }
-        storage.setItem('session:provider', service.name);
         await service.authenticate(supabase, service.provider, service.scopes);
       }}
     >
