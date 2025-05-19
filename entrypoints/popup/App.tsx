@@ -5,16 +5,16 @@ import Settings from '@mui/icons-material/Settings';
 import { getService } from '@/utils/functions';
 
 import { Button } from '@/components/ui/button';
-import { Service } from '@/utils/constants';
+import { Service } from '@/utils/service-helpers/service-base';
 import { User } from '@supabase/supabase-js';
 import FirstSignIn from '@/components/popup/service-panel/FirstSignIn';
+import { useState, useEffect } from 'react';
 
 const openSettings = () => {
   chrome.runtime.sendMessage({ type: 'open-settings' });
 };
 
 function App() {
-  // Get the current service that the user is on.
   const [currentService, setCurrentService] = useState<Service | undefined>(
     undefined,
   );
@@ -25,13 +25,10 @@ function App() {
       try {
         const service = await getService();
         setCurrentService(service);
-        const userData = (await storage?.getItem(
-          'sync:YouTube_data',
-        )) as User | null;
+        const userData = await storage?.getItem<User>('sync:YouTube_data');
         setGoogleSignIn(userData || undefined);
       } catch (error) {
         console.error('Error fetching data:', error);
-        // Optionally set an error state here
       }
     }
 

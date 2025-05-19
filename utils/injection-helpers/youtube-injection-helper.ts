@@ -1,28 +1,3 @@
-import { Provider, SupabaseClient } from '@supabase/supabase-js';
-
-export async function authenticateYouTube(
-  supabase: SupabaseClient,
-  provider: Provider,
-  scopes: string,
-) {
-  const redirectURL = chrome.identity.getRedirectURL();
-  const cleanedRedirect = redirectURL.endsWith('/')
-    ? redirectURL.slice(0, -1)
-    : redirectURL;
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: provider,
-    options: {
-      scopes: scopes,
-      redirectTo: cleanedRedirect,
-    },
-  });
-
-  if (error) throw error;
-
-  await chrome.tabs.create({ url: data.url });
-}
-
 export function youtubeMessageBuilder(username: string, text: string) {
   const youtubeMessage: YouTubeMessage = {
     clientId:

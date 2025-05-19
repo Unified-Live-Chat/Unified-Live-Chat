@@ -3,7 +3,7 @@ import {
   youtubeMessageBuilder,
   YtLiveChatItemListRenderer,
   YtActionHandlerBehavior,
-} from '@/utils/youtube-helper';
+} from '@/utils/injection-helpers/youtube-injection-helper';
 
 export default defineUnlistedScript(() => {
   // Only run on YouTube

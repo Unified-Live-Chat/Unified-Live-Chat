@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, Provider } from '@supabase/supabase-js';
 import { storage } from '#imports';
 
 const supabaseUrl = import.meta.env.WXT_SUPABASE_URL;
@@ -7,9 +7,46 @@ const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY;
 export default defineBackground(() => {
   const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
+  chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (message.type === 'open-settings') {
       chrome.tabs.create({ url: '/settings.html' });
+    }
+    // Handle Supabase-related messages
+    if (message.type === 'SUPABASE_GET_SESSION') {
+      supabase.auth.getSession().then((session) => {
+        console.log('Supabase Session Data:', session);
+        sendResponse(session);
+      });
+      return true;
+    }
+    if (message.type === 'SUPABASE_SIGN_IN') {
+      const redirectURL = chrome.identity.getRedirectURL();
+      const cleanedRedirect = redirectURL.endsWith('/')
+        ? redirectURL.slice(0, -1)
+        : redirectURL;
+
+      supabase.auth
+        .signInWithOAuth({
+          provider: message.provider as Provider,
+          options: {
+            scopes: message.scopes,
+            redirectTo: cleanedRedirect,
+          },
+        })
+        .then(sendResponse);
+      return true;
+    }
+    if (message.type === 'SUPABASE_LINK_IDENTITY') {
+      supabase.auth
+        .linkIdentity({
+          provider: message.provider as Provider,
+          options: {
+            scopes: message.scopes,
+            redirectTo: chrome.identity.getRedirectURL(),
+          },
+        })
+        .then(sendResponse);
+      return true;
     }
   });
 

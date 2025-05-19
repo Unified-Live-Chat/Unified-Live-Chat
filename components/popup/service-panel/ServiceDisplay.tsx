@@ -1,10 +1,11 @@
-import { Service } from '@/utils/constants';
-// import { OAuthButton } from './Authentication';
+import { Service } from '@/utils/service-helpers/service-base';
+import { OAuthButton } from './Authentication';
 import AccountIcon from '@/components/popup/service-panel/AccountIcon';
-// import { AuthResponse, User } from '@supabase/supabase-js';
+import { UserIdentity } from '@supabase/supabase-js';
 
 interface ServiceAccountProps {
   service: Service;
+  identity?: UserIdentity;
 }
 
 /**
@@ -12,41 +13,22 @@ interface ServiceAccountProps {
  * the user's information, and a OAuth button if they are not signed in
  *
  * @param service The service to display
+ * @param identity Optional identity that is paired with this service
  * @returns The service UI.
  */
-function ServiceDisplay({ service }: ServiceAccountProps) {
-  // const [signInData, setSignInData] = useState<User | undefined>(undefined);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        // const userData = getSession().session.user;
-        // setSignInData((userData as User) || undefined);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        // Optionally set an error state here
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  // console.log('signInData:', signInData);
-
+function ServiceDisplay({ service, identity }: Readonly<ServiceAccountProps>) {
+  console.log(identity);
   return (
-    <>
-      <div className="flex flex-col">
-        <div className="flex flex-row gap-5 m2-5 mb-1 justify-center items-center">
-          <service.icon className="w-13 h-13" />
-
-          <AccountIcon
-          // name={signInData?.user.user_metadata.name}
-          // icon={signInData?.user.user_metadata.avatar_url}
-          />
-        </div>
-        {/* {!signInData && <OAuthButton service={service} />} */}
+    <div className="flex flex-col">
+      <div className="flex flex-row gap-5 m2-5 my-1 justify-center items-center">
+        <service.icon className="w-13 h-13" />
+        <AccountIcon
+          name={identity?.identity_data?.name}
+          icon={identity?.identity_data?.avatar_url}
+        />
       </div>
-    </>
+      {!identity && <OAuthButton service={service} />}
+    </div>
   );
 }
 

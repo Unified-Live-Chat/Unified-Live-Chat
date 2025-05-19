@@ -3,7 +3,7 @@ import {
   twitchMessageBuilder,
   ReactFiber,
   DOMElement,
-} from '@/utils/twitch-helper';
+} from '@/utils/injection-helpers/twitch-injection-helper';
 
 export default defineUnlistedScript(() => {
   // Only run on Twitch

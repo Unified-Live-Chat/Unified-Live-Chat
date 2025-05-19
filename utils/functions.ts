@@ -1,4 +1,6 @@
-import { Service, Services } from './constants.ts';
+import { Services } from './constants.ts';
+import { Service } from './service-helpers/service-base';
+import { UserIdentity } from '@supabase/supabase-js';
 
 /**
  * Gets the service from the URL
@@ -30,4 +32,27 @@ export function getService(): Promise<Service | undefined> {
       }
     });
   });
+}
+
+interface ServiceIdentityPair {
+  service: Service;
+  identity?: UserIdentity;
+}
+
+/**
+ * Creates pairs of services with their matching identities
+ *
+ * @param identities Array of user identities to pair with services
+ * @returns Array of service-identity pairs
+ */
+export function createServiceIdentityPairs(
+  identities: UserIdentity[],
+): ServiceIdentityPair[] {
+  return Object.values(Services).map((service) => ({
+    service,
+    identity: identities.find(
+      (identity) =>
+        identity.provider.toLowerCase() === service.providerName.toLowerCase(),
+    ),
+  }));
 }

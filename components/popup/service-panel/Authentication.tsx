@@ -1,13 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
-
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { Service } from '@/utils/constants';
-
-const supabaseUrl = import.meta.env.WXT_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.WXT_SUPABASE_ANON_KEY;
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { supabase } from '@/lib/supabase';
+import { Service } from '@/utils/service-helpers/service-base';
 
 interface OAuthServiceProps {
   service: Service;
@@ -24,14 +18,19 @@ interface OAuthServiceProps {
  * @returns A button that, when clicked, start the OAuth process
  * for the designated service.
  */
-export function OAuthButton({ service, className }: OAuthServiceProps) {
-  console.log(service.name, supabase.auth.getSession());
-
+export function OAuthButton({
+  service,
+  className,
+}: Readonly<OAuthServiceProps>) {
   return (
     <Button
       variant="outline"
       className={cn('flex items-center gap-2 w-full', className)}
       onClick={async () => {
+        if (!service.authenticate || !service.provider) {
+          console.error('Service does not support authentication');
+          return;
+        }
         storage.setItem('session:provider', service.name);
         await service.authenticate(supabase, service.provider, service.scopes);
       }}
@@ -41,5 +40,3 @@ export function OAuthButton({ service, className }: OAuthServiceProps) {
     </Button>
   );
 }
-
-// This is a function I made for Twitch, it might not work in a general use case.
