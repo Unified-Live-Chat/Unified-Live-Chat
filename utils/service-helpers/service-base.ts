@@ -1,6 +1,5 @@
 import { Provider } from '@supabase/supabase-js';
 import { ComponentType, SVGProps } from 'react';
-import { PopupSupabaseClient } from '@/lib/supabase';
 
 export class Service {
   name: string;
@@ -10,11 +9,8 @@ export class Service {
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   authIcon: ComponentType<SVGProps<SVGSVGElement>>;
   provider?: Provider;
-  authenticate?: (
-    supabase: PopupSupabaseClient,
-    provider: Provider,
-    scopes: string,
-  ) => Promise<void>;
+  authenticate?: () => Promise<void>;
+  revoke?: () => Promise<void>;
   constructor(
     name: string,
     providerName: string,
@@ -23,11 +19,8 @@ export class Service {
     icon: ComponentType<SVGProps<SVGSVGElement>>,
     authIcon: ComponentType<SVGProps<SVGSVGElement>>,
     provider?: Provider,
-    authenticate?: (
-      supabase: PopupSupabaseClient,
-      provider: Provider,
-      scopes: string,
-    ) => Promise<void>,
+    authenticate?: () => Promise<void>,
+    revoke?: () => Promise<void>,
   ) {
     this.name = name;
     this.providerName = providerName;
@@ -37,5 +30,6 @@ export class Service {
     this.authIcon = authIcon;
     this.provider = provider;
     this.authenticate = authenticate;
+    this.revoke = revoke;
   }
 }

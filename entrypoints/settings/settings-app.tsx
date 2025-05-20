@@ -41,7 +41,7 @@ function SettingsApp() {
         />
         <div className="border-r h-47 border-gray-300" />
         <div className="flex-1 w-0 flex justify-center gap-4 py-2 px-4">
-          <div className="flex flex-col w-200">{renderActivePanel()}</div>
+          <div className="flex flex-col">{renderActivePanel()}</div>
         </div>
       </div>
     </>

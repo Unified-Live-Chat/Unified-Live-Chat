@@ -1,4 +1,5 @@
 import editSquare from '@/assets/edit_square.svg';
+import { Service } from '@/utils/service-helpers/service-base';
 import { Person } from '@mui/icons-material';
 
 interface ConnectionProps {
@@ -13,7 +14,7 @@ interface ConnectionProps {
  * @param service the service that the streamer uses.
  * @returns The component displaying the streamers account on a service.
  */
-function Connection({ service }: ConnectionProps) {
+function Connection({ service }: Readonly<ConnectionProps>) {
   return (
     <div className="flex flex-row space-x-1 justify-center items-center">
       {/* Service icon display */}

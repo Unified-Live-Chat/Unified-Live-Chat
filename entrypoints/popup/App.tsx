@@ -6,7 +6,7 @@ import { getService } from '@/utils/functions';
 
 import { Button } from '@/components/ui/button';
 import { Service } from '@/utils/service-helpers/service-base';
-import { AuthResponse, User } from '@supabase/supabase-js';
+import { User, UserResponse } from '@supabase/supabase-js';
 import FirstSignIn from '@/components/popup/service-panel/FirstSignIn';
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
@@ -20,18 +20,18 @@ function App() {
     undefined,
   );
   const [googleSignIn, setGoogleSignIn] = useState<User | undefined>(undefined);
-  const [supabaseSession, setSupabaseSession] = useState<
-    AuthResponse | undefined
-  >(undefined);
+  const [supabaseUser, setSupabaseUser] = useState<UserResponse | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     async function fetchData() {
       try {
         const service = await getService();
         setCurrentService(service);
-        const supabaseSession = await supabase.getSession();
-        setSupabaseSession(supabaseSession);
-        const userData = supabaseSession.data.session?.user;
+        const supabaseUser = await supabase.getUser();
+        setSupabaseUser(supabaseUser);
+        const userData = supabaseUser.data.user;
         setGoogleSignIn(userData || undefined);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -53,7 +53,7 @@ function App() {
           )}
           <ServicePanel
             currentService={currentService}
-            supabaseSession={supabaseSession}
+            supabaseUser={supabaseUser}
           />
         </>
       ) : (

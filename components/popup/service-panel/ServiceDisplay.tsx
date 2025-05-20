@@ -1,6 +1,6 @@
 import { Service } from '@/utils/service-helpers/service-base';
-import { OAuthButton } from './Authentication';
-import AccountIcon from '@/components/popup/service-panel/AccountIcon';
+import { OAuthButton } from '../../shared/OAuthButton';
+import AccountIcon from '@/components/shared/AccountIcon';
 import { UserIdentity } from '@supabase/supabase-js';
 
 interface ServiceAccountProps {

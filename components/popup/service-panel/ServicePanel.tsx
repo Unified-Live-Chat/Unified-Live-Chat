@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Service } from '@/utils/service-helpers/service-base';
 import ServiceDisplay from './ServiceDisplay';
-import { AuthResponse, UserIdentity } from '@supabase/supabase-js';
+import { UserResponse, UserIdentity } from '@supabase/supabase-js';
 import { createServiceIdentityPairs } from '@/utils/functions';
 
 interface ServicePanelProps {
   currentService?: Service;
-  supabaseSession?: AuthResponse;
+  supabaseUser?: UserResponse;
 }
 
 /**
@@ -15,12 +15,12 @@ interface ServicePanelProps {
  * service to log in and view their profile.
  *
  * @param currentService The service data of the website that the user is on
- * @param supabaseSession The session data of the user
+ * @param supabaseUser The user data of the user
  * @returns The UI for all of the services of the app.
  */
 function ServicePanel({
   currentService,
-  supabaseSession,
+  supabaseUser,
 }: Readonly<ServicePanelProps>) {
   const [identityPairs, setIdentityPairs] = useState<
     Array<{ service: Service; identity?: UserIdentity }>
@@ -33,8 +33,7 @@ function ServicePanel({
   useEffect(() => {
     async function fetchData() {
       try {
-        const identities =
-          supabaseSession?.data.session?.user?.identities ?? [];
+        const identities = supabaseUser?.data.user?.identities ?? [];
         setIdentityPairs(createServiceIdentityPairs(identities));
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -42,7 +41,7 @@ function ServicePanel({
     }
 
     fetchData();
-  }, [supabaseSession]);
+  }, [supabaseUser]);
 
   const alternativeServices = identityPairs.filter(
     (pair) => pair.service.name !== currentService?.name,

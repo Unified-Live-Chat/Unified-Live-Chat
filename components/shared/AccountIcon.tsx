@@ -5,7 +5,7 @@ import BuildIcon from '@/components/icons/assets/BuildIcon';
 import VideoCamIcon from '@/components/icons/assets/VideoCamIcon';
 
 interface UserRoleProps {
-  userRole: UserRole;
+  userRole?: UserRole;
 }
 
 /**
@@ -14,7 +14,12 @@ interface UserRoleProps {
  * if the user is a viewer, moderator, or streamer.
  * @returns {JSX.Element} The element displaying the role of the user.
  */
-const UserRoleDisplay: React.FC<UserRoleProps> = ({ userRole }) => {
+const UserRoleDisplay: React.FC<UserRoleProps> = ({
+  userRole,
+}: Readonly<UserRoleProps>) => {
+  if (!userRole) {
+    return null;
+  }
   if (userRole == UserRole.Streamer) {
     return (
       <div className="flex flex-row items-center">
@@ -39,6 +44,7 @@ const UserRoleDisplay: React.FC<UserRoleProps> = ({ userRole }) => {
 interface AccountIconProps {
   name?: string;
   icon?: string;
+  className?: string;
 }
 
 /**
@@ -47,10 +53,10 @@ interface AccountIconProps {
  * @param {AccountIconProps} props - Basic account information.
  * @returns {JSX.Element} The account information component.
  */
-function AccountIcon({ name, icon }: AccountIconProps) {
+function AccountIcon({ name, icon, className }: Readonly<AccountIconProps>) {
   if (name && icon) {
     return (
-      <div className="flex flex-col items-center">
+      <div className={`flex flex-col items-center ${className || ''}`}>
         <Avatar className="h-10 w-10">
           <AvatarImage src={icon} />
           <AvatarFallback className="h-10 w-10">
@@ -58,16 +64,18 @@ function AccountIcon({ name, icon }: AccountIconProps) {
           </AvatarFallback>
         </Avatar>
         <p className="text-center">{name}</p>
-        <UserRoleDisplay userRole={UserRole.Viewer} />
+        <UserRoleDisplay />
       </div>
     );
   } else {
     return (
-      <Avatar className="h-10 w-10">
-        <AvatarFallback className="h-10 w-10">
-          <UserIcon className="w-10 h-10" />
-        </AvatarFallback>
-      </Avatar>
+      <div className={className}>
+        <Avatar className="h-10 w-10">
+          <AvatarFallback className="h-10 w-10">
+            <UserIcon className="w-10 h-10" />
+          </AvatarFallback>
+        </Avatar>
+      </div>
     );
   }
 }

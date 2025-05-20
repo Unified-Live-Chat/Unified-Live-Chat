@@ -1,4 +1,4 @@
-import { OAuthButton } from './Authentication';
+import { OAuthButton } from '../../shared/OAuthButton';
 import UnifiedLiveChatLogo from '@/assets/unified_live_chat.png';
 
 function FirstSignIn() {

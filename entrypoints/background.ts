@@ -8,13 +8,21 @@ export default defineBackground(() => {
 
   chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     if (message.type === 'open-settings') {
+      console.log('[Background] Received message:', message);
       chrome.tabs.create({ url: '/settings.html' });
     }
     // Handle Supabase-related messages
     if (message.type === 'SUPABASE_GET_SESSION') {
       supabase.auth.getSession().then((session) => {
-        console.log('Supabase Session Data:', session);
+        console.log('[Background] Supabase session:', session);
         sendResponse(session);
+      });
+      return true;
+    }
+    if (message.type === 'SUPABASE_GET_USER') {
+      supabase.auth.getUser().then((user) => {
+        console.log('[Background] Supabase user:', user);
+        sendResponse(user);
       });
       return true;
     }
@@ -35,6 +43,10 @@ export default defineBackground(() => {
         .then(sendResponse);
       return true;
     }
+    if (message.type === 'SUPABASE_SIGN_OUT') {
+      supabase.auth.signOut().then(sendResponse);
+      return true;
+    }
     if (message.type === 'SUPABASE_LINK_IDENTITY') {
       supabase.auth
         .linkIdentity({
@@ -45,6 +57,40 @@ export default defineBackground(() => {
           },
         })
         .then(sendResponse);
+      return true;
+    }
+    if (message.type === 'SUPABASE_UNLINK_IDENTITY') {
+      console.log(
+        '[Background] Starting unlink process for provider:',
+        message.provider,
+      );
+      (async () => {
+        try {
+          console.log('[Background] Fetching user identities...');
+          const { data: userResponse } = await supabase.auth.getUser();
+          console.log('[Background] User response:', userResponse);
+          const identity = userResponse.user?.identities?.find(
+            (identity) => identity.provider === message.provider,
+          );
+          console.log('[Background] Found identity to unlink:', identity);
+
+          if (identity) {
+            console.log('[Background] Attempting to unlink identity...');
+            const response = await supabase.auth.unlinkIdentity(identity);
+            console.log('[Background] Unlink response:', response);
+            sendResponse(response);
+          } else {
+            console.log(
+              '[Background] No matching identity found for provider:',
+              message.provider,
+            );
+            sendResponse({ error: new Error('Identity not found') });
+          }
+        } catch (error) {
+          console.error('[Background] Error during unlink process:', error);
+          sendResponse({ error });
+        }
+      })();
       return true;
     }
   });
@@ -82,11 +128,19 @@ export default defineBackground(() => {
       }
 
       // Authenticate
-      const { error } = await supabase.auth.setSession({
+      const { data, error } = await supabase.auth.setSession({
         access_token,
         refresh_token,
       });
+      console.log('Supabase setSession result:', { data, error });
       if (error) throw error;
+
+      // Broadcast that auth is complete
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs[0]?.id) {
+          chrome.tabs.sendMessage(tabs[0].id, { type: 'AUTH_COMPLETE' });
+        }
+      });
 
       // Delete the tab
       chrome.tabs.remove(tab.id);
